@@ -45,34 +45,33 @@ async function handleStaticWithCMS(request, env) {
       // Serve static files via the ASSETS binding (direct static file serving)
       if (env.ASSETS) {
         return await env.ASSETS.fetch(request);
-      } else {
-        // Fallback: attempt to retrieve from ASSET_INDEX (KV) if ASSETS unavailable
-        let asset;
-        if (env.ASSET_INDEX) {
-          asset = await env.ASSET_INDEX.get(path);
-        }
+      } else if (env.ASSET_INDEX) {
+        // Fallback: fetch from ASSET_INDEX
+        const asset = await env.ASSET_INDEX.get(path);
         if (!asset) {
           return new Response('Not found', { status: 404 });
         }
         const contentType = getContentType(path);
         return new Response(asset, { headers: { 'Content-Type': contentType } });
+      } else {
+        return new Response('Static assets not available', { status: 500 });
       }
     }
 
-    // For HTML pages: always use the original static index.html from assets, then inject CMS data
-    let html;
-    if (env.ASSET_INDEX) {
-      html = await env.ASSET_INDEX.get('/index.html');
-    }
-
-    if (!html) {
-      console.error('HTML not found in ASSET_INDEX');
-      return new Response('Not found: no HTML source', { status: 404 });
-    }
-
-    if (!html) {
-      console.error('HTML not found in KV or ASSET_INDEX');
-      return new Response('Not found: no HTML source', { status: 404 });
+    // For HTML pages: fetch the original index.html from assets, then inject CMS data
+    let response;
+    if (env.ASSETS) {
+      response = await env.ASSETS.fetch(request);
+    } else if (env.ASSET_INDEX) {
+      const asset = await env.ASSET_INDEX.get('/index.html');
+      if (!asset) {
+        return new Response('Not found: index.html missing', { status: 404 });
+      }
+      response = new Response(asset, {
+        headers: { 'Content-Type': 'text/html;charset=UTF-8' },
+      });
+    } else {
+      return new Response('Asset storage not configured', { status: 500 });
     }
 
     // Load all CMS data from KV
@@ -80,13 +79,14 @@ async function handleStaticWithCMS(request, env) {
     const cmsData = {};
 
     for (const key of cmsKeys.keys) {
+      // Skip index_html if present
       if (key.name !== 'index_html') {
         const value = await env.CMS.get(key.name);
         cmsData[key.name] = value || '';
       }
     }
 
-    // Use HTMLRewriter to inject dynamic content
+    // Use HTMLRewriter to inject dynamic content into the response
     const rewriter = new HTMLRewriter();
 
     rewriter.on('img[data-cms-id]', {
@@ -116,25 +116,20 @@ async function handleStaticWithCMS(request, env) {
       }
     });
 
-    let rewrittenHtml;
+    let rewrittenResponse;
     try {
-      const response = new Response(html, {
-        headers: { 'content-type': 'text/html;charset=UTF-8' }
-      });
-      const transformed = await rewriter.transform(response);
-      rewrittenHtml = await transformed.text();
+      rewrittenResponse = await rewriter.transform(response);
     } catch (e) {
       console.error('Rewriter error:', e);
       return new Response('Rewriter error: ' + e.message, { status: 500 });
     }
 
-    return new Response(rewrittenHtml, {
-      headers: { 'content-type': 'text/html;charset=UTF-8' },
-    });
+    return rewrittenResponse;
   } catch (error) {
     console.error('CMS Error:', error);
     return new Response('Internal Server Error', { status: 500 });
   }
+}
 }
 
 // Helper to determine Content-Type based on file extension
