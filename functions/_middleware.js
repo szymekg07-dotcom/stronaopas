@@ -59,15 +59,15 @@ async function handleStaticWithCMS(request, env) {
       }
     }
 
-    // For HTML pages (root or any non-static path), serve index.html with CMS injection
+    // For HTML pages: always use the original static index.html from assets, then inject CMS data
     let html;
-
-    // Get edited HTML from KV first, else original static file
-    const storedHtml = await env.CMS.get('index_html');
-    if (storedHtml) {
-      html = storedHtml;
-    } else if (env.ASSET_INDEX) {
+    if (env.ASSET_INDEX) {
       html = await env.ASSET_INDEX.get('/index.html');
+    }
+
+    if (!html) {
+      console.error('HTML not found in ASSET_INDEX');
+      return new Response('Not found: no HTML source', { status: 404 });
     }
 
     if (!html) {
