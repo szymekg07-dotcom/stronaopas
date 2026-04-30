@@ -130,7 +130,6 @@ async function handleStaticWithCMS(request, env) {
     return new Response('Internal Server Error', { status: 500 });
   }
 }
-}
 
 // Helper to determine Content-Type based on file extension
 function getContentType(path) {
