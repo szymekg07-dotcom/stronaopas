@@ -89,6 +89,7 @@ async function handleStaticWithCMS(request, env) {
     // Use HTMLRewriter to inject dynamic content into the response
     const rewriter = new HTMLRewriter();
 
+    // Inject image sources - ONLY change src, preserve all other attributes
     rewriter.on('img[data-cms-id]', {
       element(element) {
         const cmsId = element.getAttribute('data-cms-id');
@@ -98,6 +99,7 @@ async function handleStaticWithCMS(request, env) {
       }
     });
 
+    // Inject text content for specific elements
     rewriter.on('h1[data-cms-id], h2[data-cms-id], h3[data-cms-id], p[data-cms-id], span[data-cms-id], div[data-cms-id], a[data-cms-id], button[data-cms-id], label[data-cms-id], strong[data-cms-id]', {
       element(element) {
         const cmsId = element.getAttribute('data-cms-id');
@@ -107,6 +109,7 @@ async function handleStaticWithCMS(request, env) {
       }
     });
 
+    // Inject background images via CSS variable
     rewriter.on('*[data-cms-bg]', {
       element(element) {
         const cmsId = element.getAttribute('data-cms-bg');
