@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maciej Opas - Kostka Brukowa | Kompleksowe usługi brukarstwa od A do Z</title>
+  <meta name="description" content="Kompleksowe usługi brukarstwa: kostka brukowa, ogrodzenia, układanie kostki. Obsługa Mazowieckie, promień 15-20 km. Doradztwo, terminowość, uczciwość, transport w cenie.">
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://maciejopas.pl/">
+  <meta property="og:title" content="Maciej Opas - Kostka Brukowa | Kompleksowe usługi brukarstwa od A do Z">
+  <meta property="og:description" content="Kompleksowe usługi brukarstwa: kostka brukowa, ogrodzenia, układanie kostki. Obsługa Mazowieckie, promień 15-20 km. Doradztwo, terminowość, uczciwość, transport w cenie.">
+  <meta property="og:image" content="https://maciejopas.pl/HERO.jpg">
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://maciejopas.pl/">
+  <meta property="twitter:title" content="Maciej Opas - Kostka Brukowa | Kompleksowe usługi brukarstwa">
+  <meta property="twitter:description" content="Kompleksowe usługi brukarstwa: kostka brukowa, ogrodzenia, układanie kostki. Objętość promień 15-20 km na Mazowieckiem.">
+  <meta property="twitter:image" content="https://maciejopas.pl/HERO.jpg">
+  <!-- Schema.org LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Maciej Opas - Kostka Brukowa",
+    "description": "Kompleksowe usługi brukarstwa: kostka brukowa, ogrodzenia, układanie kostki. Obsługa Mazowieckie, promień 15-20 km. Doradztwo, terminowość, uczciwość, transport w cenie.",
+    "image": "https://maciejopas.pl/HERO.jpg",
+    "telephone": "+48791637886",
+    "email": "maciej.opas@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Wójtowo",
+      "addressRegion": "Mazowieckie",
+      "postalCode": "",
+      "streetAddress": ""
+    },
+    "priceRange": "$$",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+      "opens": "07:00",
+      "closes": "19:00"
+    },
+    "areaServed": {
+      "@type": "State",
+      "name": "Mazowieckie"
+    },
+    "serviceArea": {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": "52.2297",
+        "longitude": "21.0122"
+      },
+      "geoRadius": 30000
+    }
+  }
+  </script>
+  <!-- Font Awesome dla Panelu i ikon -->
+  <script src="https://kit.fontawesome.com/a0b8b6c1e2.js" crossorigin="anonymous"></script>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'sans': ['Inter', 'sans-serif'],
+            'serif': ['Playfair Display', 'serif'],
+          },
+          colors: {
+            'brand-gold': {
+              'light': '#f7e7a0',
+              'DEFAULT': '#d4a84b',
+              'dark': '#b8923a',
+            },
+            'brand-black': '#0a0a0a',
+            'brand-gray': '#1a1a1a',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <!-- AOS Animation CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+   <style>
+     body { font-family: 'Inter', sans-serif; }
+     .font-serif { font-family: 'Playfair Display', serif; }
+     .hero-bg {
+       background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), var(--hero-bg, url('HERO.jpg'));
+       background-size: cover;
+       background-position: center;
+     }
+   </style>
+</head>
+<body class="bg-brand-black text-white">
+
+     <!-- Header & Navigation -->
+     <header class="fixed w-full z-50 bg-brand-black/95 backdrop-blur-sm border-b border-brand-gold/30">
+         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+             <div class="flex items-center space-x-3">
+                 <img src="Opas LOGO 2026.png" alt="Maciej Opas Logo" class="h-12 w-auto" data-cms-id="header_logo">
+                     <h1 class="text-xl font-bold text-white">Maciej Opas</h1>
+                     <p class="text-xs text-brand-gold uppercase tracking-wider" data-cms-id="header_tagline">Kostka Brukowa</p>
+                 </div>
+            </div>
+            <nav class="hidden lg:flex space-x-8">
+                <a href="#home" class="nav-link text-white hover:text-brand-gold transition">Strona główna</a>
+                <a href="#realizacje" class="nav-link text-white hover:text-brand-gold transition">Realizacje</a>
+                <a href="#o-nas" class="nav-link text-white hover:text-brand-gold transition">O Nas</a>
+                <a href="#oferta" class="nav-link text-white hover:text-brand-gold transition">Oferta</a>
+                <a href="#sprzet" class="nav-link text-white hover:text-brand-gold transition">Sprzęt</a>
+                <a href="#opinie" class="nav-link text-white hover:text-brand-gold transition">Opinie</a>
+                <a href="#faq" class="nav-link text-white hover:text-brand-gold transition">FAQ</a>
+                <a href="#kontakt" class="nav-link text-white hover:text-brand-gold transition">Kontakt</a>
+            </nav>
+            <a href="tel:791637886" class="bg-brand-gold text-brand-black px-4 py-2 rounded-lg font-semibold hover:bg-opacity-90 transition hidden md:inline-block">
+                791 637 886
+            </a>
+            <button id="mobile-menu-btn" class="lg:hidden text-white text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-brand-black border-t border-gray-800">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#home" class="block text-white hover:text-brand-gold transition">Strona główna</a>
+                <a href="#realizacje" class="block text-white hover:text-brand-gold transition">Realizacje</a>
+                <a href="#o-nas" class="block text-white hover:text-brand-gold transition">O Nas</a>
+                <a href="#oferta" class="block text-white hover:text-brand-gold transition">Oferta</a>
+                <a href="#sprzet" class="block text-white hover:text-brand-gold transition">Sprzęt</a>
+                <a href="#opinie" class="block text-white hover:text-brand-gold transition">Opinie</a>
+                <a href="#faq" class="block text-white hover:text-brand-gold transition">FAQ</a>
+                <a href="#kontakt" class="block text-white hover:text-brand-gold transition">Kontakt</a>
+                <a href="tel:791637886" class="block bg-brand-gold text-brand-black px-4 py-2 rounded-lg font-semibold text-center">791 637 886</a>
+            </div>
+        </div>
+    </header>
+
+     <!-- Hero Section -->
+     <section id="home" class="hero-bg min-h-screen flex items-center justify-center pt-20" data-cms-bg="hero_bg_image" style="--hero-bg: url('HERO.jpg')">
+         <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-7xl font-bold font-serif mb-4 md:mb-6 text-white" data-cms-id="hero_title">
+                 Kompleksowe Usługi <span class="text-brand-gold">Brukarstwa</span>
+             </h1>
+            <p class="text-lg md:text-2xl mb-6 md:mb-8 max-w-3xl mx-auto text-gray-200" data-cms-id="hero_subtitle">
+                 Od A do Z – zajmujemy się wszystkim. Kostka brukowa, ogrodzenia, układanie. 
+                 Terminowo, uczciwie, z transparentnymi kosztami.
+             </p>
+            <div class="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center mb-12 md:mb-16">
+                <a href="#kontakt" class="bg-brand-gold text-brand-black px-6 md:px-8 py-3 md:py-4 rounded-lg font-bold text-base md:text-lg hover:bg-opacity-90 transition transform hover:scale-105" data-cms-id="hero_cta1">
+                     Skontaktuj się z nami
+                 </a>
+                <a href="#realizacje" class="border-2 border-white px-6 md:px-8 py-3 md:py-4 rounded-lg font-bold text-base md:text-lg hover:bg-white hover:text-brand-black transition" data-cms-id="hero_cta2">
+                     Zobacz realizacje
+                 </a>
+            </div>
+            <!-- Desktop: icons grid -->
+            <div class="hidden md:grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                <div class="text-center">
+                    <i class="fas fa-hard-hat text-4xl text-brand-gold mb-2"></i>
+                    <h3 class="font-bold">Kompleksowo</h3>
+                    <p class="text-sm text-gray-300">Od A do Z</p>
+                </div>
+                <div class="text-center">
+                    <i class="fas fa-clock text-4xl text-brand-gold mb-2"></i>
+                    <h3 class="font-bold">Terminowo</h3>
+                    <p class="text-sm text-gray-300">Z godziny na godzinę</p>
+                </div>
+                <div class="text-center">
+                    <i class="fas fa-handshake text-4xl text-brand-gold mb-2"></i>
+                    <h3 class="font-bold">Uczciwość</h3>
+                    <p class="text-sm text-gray-300">Przejrzyste koszty</p>
+                </div>
+                <div class="text-center">
+                    <i class="fas fa-truck text-4xl text-brand-gold mb-2"></i>
+                    <h3 class="font-bold">Transport</h3>
+                    <p class="text-sm text-gray-300">Wliczony w cenę</p>
+                </div>
+            </div>
+            <!-- Mobile: phone number below buttons -->
+            <div class="mt-8 md:hidden">
+                <a href="tel:791637886" class="inline-flex items-center justify-center bg-brand-gold/10 border border-brand-gold text-brand-gold px-6 py-3 rounded-lg font-semibold hover:bg-brand-gold hover:text-brand-black transition">
+                    <i class="fas fa-phone mr-2"></i>
+                    791 637 886
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Realizacje Section -->
+    <section id="realizacje" class="py-20 bg-brand-gray" data-aos="fade-up">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold font-serif text-center mb-4">
+                 Nasze <span class="text-brand-gold">Realizacje</span>
+             </h2>
+             <p class="text-center text-gray-300 mb-12 max-w-2xl mx-auto" data-cms-id="realizacje_intro">
+                 Zobacz, co zrobiliśmy. Galeria naszych ukończonych projektów - od chodników po rozbudowane realizacje.
+             </p>
+            <div class="swiper realizacjeSwiper">
+                <div class="swiper-wrapper">
+                    <!-- 21 WhatsApp images will be populated here -->
+                     <!-- Item 1 --><div class="swiper-slide"><a href="IMG-20260423-WA0026.jpg" class="glightbox"><img src="IMG-20260423-WA0026.jpg" alt="Realizacja brukowa" class="w-full h-64 object-cover rounded-lg" data-cms-id="gallery_1" loading="lazy"></a></div>
+                     <!-- Item 2 --><div class="swiper-slide"><a href="IMG-20260423-WA0031.jpg" class="glightbox"><img src="IMG-20260423-WA0031.jpg" alt="Realizacjabrukowa" class="w-full h-64 object-cover rounded-lg" data-cms-id="gallery_2" loading="lazy"></a></div>
+                     <!-- Item 3 --><div class="swiper-slide"><a href="IMG-20260423-WA0068.jpg" class="glightbox"><img src="IMG-20260423-WA0068.jpg" alt="Realizacja brukowa" class="w-full h-64 object-cover rounded-lg" data-cms-id="gallery_3" loading="lazy"></a></div>
+                     <!-- Item 4 --><div class="swiper-slide"><a href="IMG-20260423-WA0099.jpg" class="glightbox"><img src="IMG-20260423-WA0099.jpg" alt="Realizacja brukowa" class="w-full h-64 object-cover rounded-lg" data-cms-id="gallery_4" loading="lazy"></a></div>
+                     <!-- Item 5 --><div class="swiper-slide"><a href="IMG-20260423-WA0100.jpg" class="glightbox"><img src="IMG-20260423-WA0100.jpg" alt="Realizacja brukowa" class="w-full h-64 object-cover rounded-lg" data-cms-id="gallery_5" loading="lazy"></a></div>
+                     <!-- Item 6 --><div class="swiper-slide"><a href="IMG-20260423-WA0161.jpg" class="glightbox"><img src="IMG-20260423-WA0161.jpg" alt="Realizacja brukowa" class="w-full h-64 object-cover rounded-lg" data-cms-id="gallery_6" loading="lazy"></a></div>
+                     <!-- Item 7 --><div class="swiper-slide"><a href="IMG-20260423-WA0203.jpg" class="glightbox"><img src="IMG-20260423-WA0203.jpg" alt="Realizacja brukowa" class="w-full h-64 object-cover rounded-lg" data-cms-id="gallery_7" loading="lazy"></a></div>
+                     <!-- Item 8 --><div class="swiper-slide"><a href="IMG-20260423-WA0210.jpg" class="glightbox"><img src="IMG-20260423-WA0210.jpg" alt="Realizacja brukowa" class="w-full h-64 object-cover rounded-lg" data-cms-id="gallery_8" loading="lazy"></a></div>
+                     <!-- Item 9 --><div class="swiper-slide"><a href="IMG-20260423-WA0252.jpg" class="glightbox"><img src="IMG-20260423-WA0252.jpg" alt="Realizacja brukowa" class="w-full h-64 object-cover rounded-lg" data-cms-id="gallery_9" loading="lazy"></a></div>
+                     <!-- Item 10 --><div class="swiper-slide"><a href="IMG-20260423-WA0269.jpg" class="glightbox"><img src="IMG-20260423-WA0269.jpg" alt="Realizacja brukowa" class="w-full h-64 object-cover rounded-lg" data-cms-id="gallery_10" loading="lazy"></a></div>
+                     <!-- Item 11 --><div class="swiper-slide"><a href="IMG-20260423-WA0272.jpg" class="glightbox"><img src="IMG-20260423-WA0272.jpg" alt="Realizacja brukowa" class="w-full h-64 object-cover rounded-lg" data-cms-id="gallery_11" loading="lazy"></a></div>
+                     <!-- Item 12 --><div class="swiper-slide"><a href="IMG-20260423-WA0281.jpg" class="glightbox"><img src="IMG-20260423-WA0281.jpg" alt="Realizacja brukowa" class="w-full h-64 object-cover rounded-lg" data-cms-id="gallery_12" loading="lazy"></a></div>
+                     <!-- Item 13 --><div class="swiper-slide"><a href="IMG-20260423-WA0293.jpg" class="glightbox"><img src="IMG-20260423-WA0293.jpg" alt="Realizacja brukowa" class="w-full h-64 object-cover rounded-lg" data-cms-id="gallery_13" loading="lazy"></a></div>
+                     <!-- Item 14 --><div class="swiper-slide"><a href="IMG-20260423-WA0295.jpg" class="glightbox"><img src="IMG-20260423-WA0295.jpg" alt="Realizacja brukowa" class="w-full h-64 object-cover rounded-lg" data-cms-id="gallery_14" loading="lazy"></a></div>
+                     <!-- Item 15 --><div class="swiper-slide"><a href="IMG-20260423-WA0314.jpg" class="glightbox"><img src="IMG-20260423-WA0314.jpg" alt="Realizacja brukowa" class="w-full h-64 object-cover rounded-lg" data-cms-id="gallery_15" loading="lazy"></a></div>
+                     <!-- Item 16 --><div class="swiper-slide"><a href="IMG-20260423-WA0329.jpg" class="glightbox"><img src="IMG-20260423-WA0329.jpg" alt="Realizacja brukowa" class="w-full h-64 object-cover rounded-lg" data-cms-id="gallery_16" loading="lazy"></a></div>
+                     <!-- Item 17 --><div class="swiper-slide"><a href="IMG-20260423-WA0345.jpg" class="glightbox"><img src="IMG-20260423-WA0345.jpg" alt="Realizacja brukowa" class="w-full h-64 object-cover rounded-lg" data-cms-id="gallery_17" loading="lazy"></a></div>
+                     <!-- Item 18 --><div class="swiper-slide"><a href="IMG-20260423-WA0347.jpg" class="glightbox"><img src="IMG-20260423-WA0347.jpg" alt="Realizacja brukowa" class="w-full h-64 object-cover rounded-lg" data-cms-id="gallery_18" loading="lazy"></a></div>
+                     <!-- Item 19 --><div class="swiper-slide"><a href="IMG-20260423-WA0352.jpg" class="glightbox"><img src="IMG-20260423-WA0352.jpg" alt="Realizacja brukowa" class="w-full h-64 object-cover rounded-lg" data-cms-id="gallery_19" loading="lazy"></a></div>
+                     <!-- Item 20 --><div class="swiper-slide"><a href="IMG-20260423-WA0355.jpg" class="glightbox"><img src="IMG-20260423-WA0355.jpg" alt="Realizacja brukowa" class="w-full h-64 object-cover rounded-lg" data-cms-id="gallery_20" loading="lazy"></a></div>
+                </div>
+                <!-- Navigation arrows -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- O Nas Section -->
+    <section id="o-nas" class="py-20 bg-brand-black" data-aos="fade-up">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                     <h2 class="text-4xl md:text-5xl font-bold font-serif mb-6 text-brand-gold" data-cms-id="about_title">
+                         O Nas
+                     </h2>
+                     <p class="text-lg mb-4 text-gray-300" data-cms-id="about_text1">
+                         <strong class="text-white">Maciej Opas – Kostka Brukowa</strong> to firma, która stawia na kompleksową obsługę klienta od samego początku, aż po finalne zakończenie projektu. Nasza misja to dostarczanie najwyższej jakości usług brukarstwa z zachowaniem zasad uczciwości, terminowości i dbałości o każdy detal.
+                     </p>
+                     <p class="text-lg mb-6 text-gray-300" data-cms-id="about_text2">
+                         Działamy na terenie Mazowieckiego, w promieniu 15-20 km. Nasz zespół doświadczonych specjalistów kompleksowo zajmuje się układaniem kostki brukowej oraz budową ogrodzeń – od projektu po finalną realizację. Dostarczamy również transport materiałów, co oznacza, że klient otrzymuje pełen zakres usług "od A do Z" bez konieczności organizowania logistyki.
+                     </p>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check-circle text-brand-gold text-2xl"></i>
+                            <span>Doświadczenie</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check-circle text-brand-gold text-2xl"></i>
+                            <span>Gwarancja jakości</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check-circle text-brand-gold text-2xl"></i>
+                            <span>Przejrzyste koszty</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check-circle text-brand-gold text-2xl"></i>
+                            <span>Solidność</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                     <img src="HERO.jpg" alt="Projekt brukowy" class="rounded-lg shadow-xl transform hover:scale-105 transition duration-300" data-cms-id="about_img1" loading="lazy">
+                     <img src="Opas LOGO 2026.png" alt="Logo firmy" class="rounded-lg shadow-xl transform hover:scale-105 transition duration-300 mt-8" data-cms-id="about_img2" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Oferta Section -->
+    <section id="oferta" class="py-20 bg-brand-gray" data-aos="fade-up">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold font-serif text-center mb-4 text-brand-gold" data-cms-id="services_title">
+                 Nasza Oferta
+             </h2>
+             <p class="text-center text-gray-300 mb-12 max-w-2xl mx-auto" data-cms-id="services_intro">
+                 Kompleksowo realizujemy projekty od A do Z: kostka brukowa, ogrodzenia, układanie chodników. 
+                 Zajmujemy się wszystkim – od porady i doboru materiałów, przez transport, po precyzyjny montaż.
+             </p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-brand-black rounded-lg border border-gray-800 hover:border-brand-gold transition group overflow-hidden">
+                    <div class="h-48 overflow-hidden">
+                         <img src="IMG-20260423-WA0026.jpg" alt="Kostka brukowa - realizacja" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-cms-id="service1_img" loading="lazy">
+                    </div>
+                    <div class="p-8">
+                        <div class="text-brand-gold text-4xl mb-6">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                         <h3 class="text-2xl font-bold mb-3" data-cms-id="service1_title">Kostka brukowa</h3>
+                         <p class="text-gray-400 mb-4" data-cms-id="service1_desc">
+                             Profesjonalne układanie kostki brukowej w różnych wzorach i kolorach. 
+                             Oferta obejmuje kostkę betonową, granitową oraz autorską kostkę.
+                         </p>
+                    </div>
+                </div>
+                <!-- Service 2 -->
+                <div class="bg-brand-black rounded-lg border border-gray-800 hover:border-brand-gold transition group overflow-hidden">
+                    <div class="h-48 overflow-hidden">
+                         <img src="IMG-20260423-WA0252.jpg" alt="Ogrodzenia - realizacja" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-cms-id="service2_img" loading="lazy">
+                    </div>
+                    <div class="p-8">
+                        <div class="text-brand-gold text-4xl mb-6">
+                            <i class="fas fa-fence"></i>
+                        </div>
+                         <h3 class="text-2xl font-bold mb-3" data-cms-id="service2_title">Ogrodzenia</h3>
+                         <p class="text-gray-400 mb-4" data-cms-id="service2_desc">
+                             Montaż solidnych ogrodzeń: panelowe, metalowe, z płotu. 
+                             Dostosowane do potrzeb i budżetu.
+                         </p>
+                    </div>
+                </div>
+                <!-- Service 3 -->
+                <div class="bg-brand-black rounded-lg border border-gray-800 hover:border-brand-gold transition group overflow-hidden">
+                    <div class="h-48 overflow-hidden">
+                         <img src="IMG-20260423-WA0068.jpg" alt="Układanie kostki - realizacja" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-cms-id="service3_img" loading="lazy">
+                    </div>
+                    <div class="p-8">
+                        <div class="text-brand-gold text-4xl mb-6">
+                            <i class="fas fa-route"></i>
+                        </div>
+                         <h3 class="text-2xl font-bold mb-3" data-cms-id="service3_title">Układanie kostki</h3>
+                         <p class="text-gray-400 mb-4" data-cms-id="service3_desc">
+                             Układanie chodników, pjętów, podjazdów i placów. 
+                             Dbamy o odpowiednią spadlerkę i drenaż.
+                         </p>
+                    </div>
+                </div>
+            </div>
+            <!-- CTA Banner -->
+            <div class="mt-16 bg-gradient-to-r from-brand-black via-brand-gray to-brand-black border border-brand-gold/30 rounded-2xl p-8 md:p-12 text-center">
+                <div class="max-w-3xl mx-auto">
+                     <h3 class="text-3xl md:text-4xl font-bold font-serif mb-4" data-cms-id="cta_title">
+                         Nie widzisz czego <span class="text-brand-gold">oczekujesz</span>?
+                     </h3>
+                     <p class="text-xl text-gray-300 mb-8" data-cms-id="cta_text">
+                         Zadzwoń i dogadaj się z nami na bezpłatną wycenę i konsultację.
+                         Zapewniamy kompleksową obsługę od A do Z.
+                     </p>
+                    <a href="tel:791637886" class="inline-block bg-brand-gold text-brand-black px-10 py-5 rounded-xl font-bold text-xl hover:bg-opacity-90 transition transform hover:scale-105 shadow-xl">
+                        <i class="fas fa-phone mr-3"></i>791 637 886
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- Sprzęt Section -->
+     <section id="sprzet" class="py-20 bg-brand-black" data-aos="fade-up">
+         <div class="container mx-auto px-4">
+              <h2 class="text-4xl md:text-5xl font-bold font-serif text-center mb-4">
+                  Nasz <span class="text-brand-gold">Sprzęt</span>
+              </h2>
+              <p class="text-center text-gray-300 mb-12 max-w-2xl mx-auto" data-cms-id="equipment_intro">
+                  Dysponujemy nowoczesnym sprzętem, który zapewnia precyzyjną i efektywną realizację każdego projektu. 
+                  Nasze maszyny to gwarancja dokładności, terminowości i najwyższej jakości usług.
+              </p>
+             <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                 <!-- Sprzęt 1 -->
+                 <div class="group">
+                      <div class="overflow-hidden rounded-lg shadow-2xl">
+                          <img src="sprzet1.jpg" alt="Sprzęt budowlany - maszyna nr 1" class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110" data-cms-id="equipment1_img" loading="lazy">
+                      </div>
+                 </div>
+                 <!-- Sprzęt 2 -->
+                 <div class="group">
+                      <div class="overflow-hidden rounded-lg shadow-2xl">
+                          <img src="sprzet2.jpg" alt="Sprzęt budowlany - maszyna nr 2" class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110" data-cms-id="equipment2_img" loading="lazy">
+                      </div>
+                 </div>
+                 <!-- Sprzęt 3 -->
+                 <div class="group">
+                      <div class="overflow-hidden rounded-lg shadow-2xl">
+                          <img src="sprzet3.jpg" alt="Sprzęt budowlany - maszyna nr 3" class="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110" data-cms-id="equipment3_img" loading="lazy">
+                      </div>
+                 </div>
+             </div>
+             <div class="mt-12 text-center">
+                 <p class="text-xl text-gray-300">
+                     <i class="fas fa-truck text-brand-gold mr-2"></i>
+                     <strong>Transport w cenie</strong> - zapewniamy dostawę materiałów na plac budowy.
+                 </p>
+             </div>
+         </div>
+     </section>
+
+    <!-- Opinie Section -->
+    <section id="opinie" class="py-20 bg-brand-gray" data-aos="fade-up">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold font-serif text-center mb-4">
+                Opinie <span class="text-brand-gold">Klientów</span>
+            </h2>
+            <p class="text-center text-gray-300 mb-12 max-w-2xl mx-auto" data-cms-id="testimonials_intro">
+                Zaufanie naszych klientów jest dla nas najważniejsze. Sprawdź, co mówią o naszej pracy.
+            </p>
+            <div class="swiper opinieSwiper max-w-4xl mx-auto">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide bg-brand-black p-8 rounded-lg border border-gray-800">
+                        <div class="flex items-center mb-4">
+                            <div class="text-brand-gold">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                         <p class="text-gray-300 italic mb-4" data-cms-id="testimonial1">
+                             "Bardzo profesjonalna firma. Układali mi kostkę brukową na podjeździe. 
+                             Praca wykonana na czasie, bez ukrytych kosztów. Polecam!"
+                         </p>
+                    </div>
+                    <div class="swiper-slide bg-brand-black p-8 rounded-lg border border-gray-800">
+                        <div class="flex items-center mb-4">
+                            <div class="text-brand-gold">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                         <p class="text-gray-300 italic mb-4" data-cms-id="testimonial2">
+                             "Kompleksowa obsługa - od doradztwa po montaż ogrodzenia. 
+                             Pan Maciej pomógł wybrać najlepsze rozwiązanie. Wszystko w jednym miejscu."
+                         </p>
+                    </div>
+                    <div class="swiper-slide bg-brand-black p-8 rounded-lg border border-gray-800">
+                        <div class="flex items-center mb-4">
+                            <div class="text-brand-gold">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                         <p class="text-gray-300 italic mb-4" data-cms-id="testimonial3">
+                             "Szybka i rzetelna realizacja ogrodzenia. Materiały dostarczone na czas, 
+                             a sama robota wykonana bardzo starannie. Polecam!"
+                         </p>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+            <p class="text-center text-gray-500 text-sm mt-8">Opinie z Google</p>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-brand-black" data-aos="fade-up">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold font-serif text-center mb-4" data-cms-id="faq_title">
+                <span class="text-brand-gold">FAQ</span> - Pytania i Odpowiedzi
+            </h2>
+            <div class="max-w-3xl mx-auto space-y-4 mt-12">
+                <div class="faq-item bg-brand-gray rounded-lg overflow-hidden">
+                     <button class="faq-question w-full text-left p-6 flex justify-between items-center focus:outline-none">
+                         <span class="text-lg font-semibold" data-cms-id="faq_q1">Czy robicie kompleksowo i czy zapewniacie kostkę?</span>
+                         <i class="fas fa-chevron-down text-brand-gold transition-transform"></i>
+                     </button>
+                     <div class="faq-answer px-6 pb-6 text-gray-300 hidden" data-cms-id="faq_a1">
+                         Tak, oferujemy kompleksową obsługę od A do Z. Dostarczamy i układamy kostkę brukową oraz ogrodzenia. 
+                         Transport materiałów jest wliczony w cenę, co oznacza, że 
+                         nie musisz się martwić o logistykę - wszystko załatwiamy my.
+                     </div>
+                </div>
+                <div class="faq-item bg-brand-gray rounded-lg overflow-hidden">
+                     <button class="faq-question w-full text-left p-6 flex justify-between items-center focus:outline-none">
+                         <span class="text-lg font-semibold" data-cms-id="faq_q2">Z jakim obszarem pracujecie?</span>
+                         <i class="fas fa-chevron-down text-brand-gold transition-transform"></i>
+                     </button>
+                     <div class="faq-answer px-6 pb-6 text-gray-300 hidden" data-cms-id="faq_a2">
+                         Nasza działalność koncentruje się na terenie Mazowieckiego, w promieniu około 15-20 km.
+                     </div>
+                </div>
+                <div class="faq-item bg-brand-gray rounded-lg overflow-hidden">
+                     <button class="faq-question w-full text-left p-6 flex justify-between items-center focus:outline-none">
+                         <span class="text-lg font-semibold" data-cms-id="faq_q3">Nie wiem, jak to wygląda. Nie znam się na kostce brukowej. Co mogę zrobić?</span>
+                         <i class="fas fa-chevron-down text-brand-gold transition-transform"></i>
+                     </button>
+                     <div class="faq-answer px-6 pb-6 text-gray-300 hidden" data-cms-id="faq_a3">
+                         Nie ma problemu! Zajmujemy się całym procesem od A do Z. Na pierwszym spotkaniu omówimy wszystkie szczegóły, pomogę dobrać kostkę do Twoich potrzeb i budżetu, a następnie zapewnię transport i precyzyjny montaż. Wyjaśnię wszystko krok po kroku, szczerze i wyczerpująco — od projektu po finalną realizację.
+                     </div>
+                </div>
+                <div class="faq-item bg-brand-gray rounded-lg overflow-hidden">
+                     <button class="faq-question w-full text-left p-6 flex justify-between items-center focus:outline-none">
+                         <span class="text-lg font-semibold" data-cms-id="faq_q4">Czy ceny są przejrzyste?</span>
+                         <i class="fas fa-chevron-down text-brand-gold transition-transform"></i>
+                     </button>
+                     <div class="faq-answer px-6 pb-6 text-gray-300 hidden" data-cms-id="faq_a4">
+                         Zdecydowanie tak. Jesteśmy zwolennikami uczciwości i terminowości. 
+                         Przed rozpoczęciem prac przedstawiamy szczegółową wycenę bez ukrytych kosztów. 
+                         Co się zaoblega, to zapłacisz.
+                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="kontakt" class="py-20 bg-brand-gray" data-aos="fade-up">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold font-serif text-center mb-4">
+                <span class="text-brand-gold">Kontakt</span>
+            </h2>
+            <p class="text-center text-gray-300 mb-12 max-w-2xl mx-auto" data-cms-id="contact_intro">
+                Skontaktuj się z nami telefonicznie lub mailowo po bezpłatną wycenę i konsultację.
+            </p>
+            <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+                <div class="bg-brand-black p-8 rounded-lg text-center border border-gray-800 hover:border-brand-gold transition group">
+                    <div class="text-brand-gold text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Telefon</h3>
+                    <a href="tel:791637886" class="text-3xl text-white hover:text-brand-gold transition">791 637 886</a>
+                </div>
+                <div class="bg-brand-black p-8 rounded-lg text-center border border-gray-800 hover:border-brand-gold transition group">
+                    <div class="text-brand-gold text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Email</h3>
+                    <a href="mailto:maciej.opas@gmail.com" class="text-xl text-white hover:text-brand-gold transition break-all">maciej.opas@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-8 border-t border-gray-800" data-aos="fade-up">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-3 mb-4 md:mb-0">
+                    <img src="Opas LOGO 2026.png" alt="Maciej Opas Logo" class="h-10 w-auto" loading="lazy">
+                    <div>
+                     <h3 class="text-lg font-bold">Maciej Opas</h3>
+                     <p class="text-sm text-brand-gold" data-cms-id="footer_subtitle">Kostka Brukowa</p>
+                    </div>
+                </div>
+                <div class="text-center md:text-right text-gray-400">
+                     <p data-cms-id="footer_copyright">© 2026 Maciej Opas - Kostka Brukowa. Wszelkie prawa zastrzeżone.</p>
+                     <p class="text-sm mt-2" data-cms-id="footer_address">Obsługa Mazowiecki, promień 15-20 km</p>
+                 </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+    <!-- AOS Animation JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100,
+            delay: 0,
+        });
+        // Initialize Swiper for Realizacje
+        const realizacjeSwiper = new Swiper('.realizacjeSwiper', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.realizacjeSwiper .swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.realizacjeSwiper .swiper-button-next',
+                prevEl: '.realizacjeSwiper .swiper-button-prev',
+            },
+            breakpoints: {
+                640: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+            }
+        });
+
+        // Initialize Swiper for Opinie
+        const opinieSwiper = new Swiper('.opinieSwiper', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+                delay: 6000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.opinieSwiper .swiper-pagination',
+                clickable: true,
+            },
+        });
+
+        // Initialize GLightbox
+        const lightbox = GLightbox({
+            touchNavigation: true,
+            loop: true,
+            zoomable: true,
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                const answer = faqItem.querySelector('.faq-answer');
+                const icon = question.querySelector('i');
+
+                answer.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu on navigate
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // ============================================
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+              target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+              // Close mobile menu on navigate
+              mobileMenu.classList.add('hidden');
+            }
+          });
+        });
+      </script>
+    </body>
+    </html>
