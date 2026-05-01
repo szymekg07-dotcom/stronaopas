@@ -607,48 +607,17 @@ async function adminPanel(request, env) {
           
           <div class="space-y-8">
             <!-- One word -->
-            <div class="bg-brand-gray/30 p-6 rounded-lg border border-gray-700/50">
+            <div class="bg-brand-gray/30 p-6 rounded-lg border border-gray-700/50 mb-6">
               <h4 class="font-bold text-brand-gold text-xl mb-3">Jeden wyraz:</h4>
-              <p class="text-gray-300 mb-6 leading-relaxed">
-                Aby słowo było złote, wpisz przed nim <span class="text-green-400 font-mono">&lt;span&gt;</span> z odpowiednią klasą i zamknij go <span class="text-green-400 font-mono">&lt;/span&gt;</span>.
+              <p class="text-gray-300 mb-4 leading-relaxed">
+                Aby słowo było złote, wpisz przed nim <span class="inline-block bg-black/70 px-3 py-1.5 rounded text-base text-green-400 font-mono border border-gray-600 tracking-wide">&lt;span&gt;</span> z odpowiednią klasą i zamknij go <span class="inline-block bg-black/70 px-3 py-1.5 rounded text-base text-green-400 font-mono border border-gray-600 tracking-wide">&lt;/span&gt;</span>.
               </p>
-              <div class="bg-black/60 p-6 rounded-lg border border-gray-600/40">
-                <p class="text-sm text-gray-400 mb-3 font-medium">Wzór do wpisania:</p>
-                <code class="block text-gray-100 font-mono text-lg leading-relaxed break-words select-all">
+              <div class="bg-black/50 p-5 rounded-lg border border-gray-600/40 mt-4">
+                <p class="text-sm text-gray-400 mb-2 font-medium">Wzór do wpisania:</p>
+                <code class="block text-gray-100 font-mono text-base leading-relaxed break-words">
                   &lt;span class="text-brand-gold"&gt;Twoje Słowo&lt;/span&gt;
                 </code>
               </div>
-            </div>
-
-            <!-- Two words -->
-            <div class="bg-brand-gray/30 p-6 rounded-lg border border-gray-700/50">
-              <h4 class="font-bold text-brand-gold text-xl mb-3">Dwa wyrazy (lub więcej):</h4>
-              <p class="text-gray-300 mb-6 leading-relaxed">
-                Aby dwa wyrazy były złote, owiń je oba w jeden znacznik.
-              </p>
-              <div class="bg-black/60 p-6 rounded-lg border border-gray-600/40">
-                <p class="text-sm text-gray-400 mb-3 font-medium">Wzór do wpisania:</p>
-                <code class="block text-gray-100 font-mono text-lg leading-relaxed break-words select-all">
-                  &lt;span class="text-brand-gold"&gt;Pierwsze i Drugie Słowo&lt;/span&gt;
-                </code>
-              </div>
-            </div>
-
-            <!-- Full sentence example -->
-            <div class="bg-brand-gray/30 p-6 rounded-lg border border-gray-700/50">
-              <h4 class="font-bold text-brand-gold text-xl mb-3">Przykład – pełne zdanie:</h4>
-              <div class="bg-black/60 p-6 rounded-lg border border-gray-600/40">
-                <p class="text-sm text-gray-400 mb-3 font-medium">Wzór do wpisania:</p>
-                <code class="block text-gray-100 font-mono text-lg leading-relaxed break-words select-all">
-                  Kompleksowa Usługa &lt;span class="text-brand-gold"&gt;Brukarska&lt;/span&gt;
-                </code>
-              </div>
-              <p class="text-sm text-gray-400 mt-4 italic">
-                Po zapisaniu na stronie wyświetli się: 
-                <span class="text-white">Kompleksowa Usługa </span><span class="text-brand-gold">Brukarska</span>
-              </p>
-            </div>
-          </div>
             </div>
 
             <!-- Two words -->
