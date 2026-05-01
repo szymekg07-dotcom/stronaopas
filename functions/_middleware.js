@@ -187,6 +187,187 @@ function loginPage() {
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { font-family: 'Inter', sans-serif; background: #0a0a0a; }
+    .cms-input, .cms-textarea {
+      width: 100%;
+      padding: 0.75rem;
+      background: #1a1a1a;
+      border: 2px solid #374151;
+      border-radius: 0.5rem;
+      color: white;
+      font-size: 0.875rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .cms-input:focus, .cms-textarea:focus {
+      outline: none;
+      border-color: #d4a84b;
+      box-shadow: 0 0 0 3px rgba(212, 168, 75, 0.2);
+    }
+    .cms-textarea { min-height: 120px; resize: vertical; }
+    .section-card {
+      background: linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%);
+      border: 1px solid #2a2a2a;
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .section-card:hover { border-color: #d4a84b40; }
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #d4a84b;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #d4a84b30;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .field-group {
+      margin-bottom: 1.5rem;
+      padding: 1.25rem;
+      background: #0a0a0a;
+      border-radius: 0.75rem;
+      border: 1px solid #1f1f1f;
+    }
+    .field-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #e5e5e5;
+      margin-bottom: 0.5rem;
+    }
+    .field-hint {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-generate {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: #374151;
+      color: white;
+      border-radius: 0.5rem;
+      font-size: 0.75rem;
+      text-decoration: none;
+      transition: background 0.2s;
+      margin-top: 0.5rem;
+    }
+    .btn-generate:hover { background: #4b5563; }
+    .btn-save-section {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: #d4a84b;
+      color: black;
+      border: none;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 1rem;
+    }
+    .btn-save-section:hover {
+      background: #b8923a;
+      transform: translateY(-1px);
+    }
+    .btn-save-section.saved {
+      background: #10b981;
+      color: white;
+    }
+    .btn-save-section.saved i {
+      animation: checkBounce 0.5s ease;
+    }
+    @keyframes checkBounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+    .code-example {
+      background: #0a0a0a;
+      border: 2px solid #374151;
+      border-radius: 0.5rem;
+      padding: 0.875rem 1rem;
+      margin: 0.5rem 0;
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      font-size: 0.8125rem;
+      color: #a5f3fc;
+      position: relative;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      cursor: pointer;
+      transition: all 0.2s;
+      line-height: 1.5;
+      user-select: all;
+    }
+    .code-example:hover {
+      border-color: #60a5fa;
+      background: #111111;
+    }
+    .code-example::before {
+      content: '📋';
+      position: absolute;
+      top: 0.5rem;
+      right: 0.75rem;
+      opacity: 0.4;
+      font-size: 0.875rem;
+    }
+    .success-toast {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: #10b981;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 1000;
+      animation: slideIn 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    .copy-feedback {
+      position: fixed;
+      top: 1rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100%);
+      background: #10b981;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 1000;
+      font-weight: 600;
+      animation: copySlideDown 0.3s ease forwards;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    @keyframes copySlideDown {
+      from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+      to { transform: translateX(-50%) translateY(0); opacity: 1; }
+    }
+    @keyframes copySlideUp {
+      from { transform: translateX(-50%) translateY(0); opacity: 1; }
+      to { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+    }
+    .admin-header {
+      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+      border-bottom: 1px solid #d4a84b30;
+      padding: 1.5rem 0;
+      margin-bottom: 2rem;
+    }
   </style>
 </head>
 <body class="bg-brand-black text-white min-h-screen flex items-center justify-center">
@@ -328,6 +509,167 @@ async function adminPanel(request, env) {
       padding: 2rem;
       margin-bottom: 2rem;
       transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .section-card:hover {
+      border-color: #d4a84b40;
+    }
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #d4a84b;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #d4a84b30;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .field-group {
+      margin-bottom: 1.5rem;
+      padding: 1.25rem;
+      background: #0a0a0a;
+      border-radius: 0.75rem;
+      border: 1px solid #1f1f1f;
+    }
+    .field-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #e5e5e5;
+      margin-bottom: 0.5rem;
+    }
+    .field-hint {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-generate {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: #374151;
+      color: white;
+      border-radius: 0.5rem;
+      font-size: 0.75rem;
+      text-decoration: none;
+      transition: background 0.2s;
+      margin-top: 0.5rem;
+    }
+    .btn-generate:hover {
+      background: #4b5563;
+    }
+    .btn-save-section {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: #d4a84b;
+      color: black;
+      border: none;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 1rem;
+    }
+    .btn-save-section:hover {
+      background: #b8923a;
+      transform: translateY(-1px);
+    }
+    .btn-save-section.saved {
+      background: #10b981;
+      color: white;
+    }
+    .btn-save-section.saved i {
+      animation: checkBounce 0.5s ease;
+    }
+    @keyframes checkBounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+    .code-example {
+      background: #0a0a0a;
+      border: 2px solid #374151;
+      border-radius: 0.5rem;
+      padding: 0.875rem 1rem;
+      margin: 0.5rem 0;
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      font-size: 0.8125rem;
+      color: #a5f3fc;
+      position: relative;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      cursor: pointer;
+      transition: all 0.2s;
+      line-height: 1.5;
+      user-select: all;
+    }
+    .code-example:hover {
+      border-color: #60a5fa;
+      background: #111111;
+    }
+    .code-example::before {
+      content: '📋';
+      position: absolute;
+      top: 0.5rem;
+      right: 0.75rem;
+      opacity: 0.4;
+      font-size: 0.875rem;
+    }
+    .success-toast {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: #10b981;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 1000;
+      animation: slideIn 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    .copy-feedback {
+      position: fixed;
+      top: 1rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100%);
+      background: #10b981;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 1000;
+      font-weight: 600;
+      animation: copySlideDown 0.3s ease forwards;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    @keyframes copySlideDown {
+      from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+      to { transform: translateX(-50%) translateY(0); opacity: 1; }
+    }
+    @keyframes copySlideUp {
+      from { transform: translateX(-50%) translateY(0); opacity: 1; }
+      to { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+    }
+    .admin-header {
+      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+      border-bottom: 1px solid #d4a84b30;
+      padding: 1.5rem 0;
+      margin-bottom: 2rem;
     }
     .section-card:hover {
       border-color: #d4a84b40;
@@ -642,24 +984,83 @@ async function adminPanel(request, env) {
       </div>
     </div>
 
-    <!-- Instruction Banner -->
-    <div class="mb-8 p-6 bg-gradient-to-r from-blue-900/30 to-purple-900/30 border-2 border-blue-500/50 rounded-xl shadow-lg">
-      <div class="flex items-start gap-4">
-        <div class="text-2xl mt-1">💡</div>
-        <div class="flex-1">
-          <h3 class="text-lg font-bold text-blue-300 mb-2">Instrukcja</h3>
-          <p class="text-gray-200 leading-relaxed mb-3">
-            <strong class="text-white">Aby dodać zdjęcie:</strong> Kliknij przycisk "Generuj link z pliku", wgraj plik na zewnętrzny serwer (postimages.org), skopiuj <em>"Link bezpośredni"</em> i wklej go w pole tekstowe.
+    <!-- Instruction Accordion -->
+    <details class="bg-brand-dark border-2 border-brand-gold p-6 rounded-xl mb-8 shadow-lg group">
+      <summary class="font-bold text-brand-gold cursor-pointer text-lg flex items-center gap-2 select-none">
+        <i class="fas fa-book-open text-2xl group-open:rotate-90 transition-transform"></i>
+        📖 Kliknij tutaj, aby zobaczyć pełną instrukcję (kolory, zdjęcia, zapisywanie)
+      </summary>
+      
+      <div class="mt-6 space-y-6 text-gray-200">
+        <!-- Standard text section -->
+        <div>
+          <h3 class="text-white font-bold text-lg mb-2">📝 Tekst zwykły (biały)</h3>
+          <p class="leading-relaxed">
+            Jeśli chcesz, aby tekst był zwykły (biały), po prostu wpisz go normalnie w pole edycji, bez żadnych dodatkowych znaczników.
           </p>
-          <p class="text-gray-300 leading-relaxed mb-3">
-            <strong class="text-white">Zapisywanie zmian:</strong> Po każdej edycji w danej sekcji musisz kliknąć przycisk <span class="inline-block px-2 py-1 bg-brand-gold text-black font-semibold rounded text-sm mx-1">Zapisz sekcję</span>, aby zmiany zostały opublikowane na stronie.
+        </div>
+
+        <!-- Gold color section -->
+        <div>
+          <h3 class="text-white font-bold text-lg mb-3">✨ Jak dodać złoty kolor?</h3>
+          
+          <div class="space-y-4 ml-4">
+            <div class="bg-brand-gray/50 p-4 rounded-lg border border-gray-700">
+              <p class="font-semibold text-brand-gold mb-2">Jeden wyraz:</p>
+              <div class="code-example" onclick="copyToClipboard(this)" data-copy="<span class=\"text-brand-gold\">Twoje Słowo</span>">
+                &lt;span class="text-brand-gold"&gt;Twoje Słowo&lt;/span&gt;
+              </div>
+            </div>
+
+            <div class="bg-brand-gray/50 p-4 rounded-lg border border-gray-700">
+              <p class="font-semibold text-brand-gold mb-2">Dwa wyrazy (lub więcej):</p>
+              <div class="code-example" onclick="copyToClipboard(this)" data-copy="<span class=\"text-brand-gold\">TWOJE SŁOWO I TWOJE SŁOWO</span>">
+                &lt;span class="text-brand-gold"&gt;TWOJE SŁOWO I TWOJE SŁOWO&lt;/span&gt;
+              </div>
+            </div>
+
+            <div class="bg-brand-gray/50 p-4 rounded-lg border border-gray-700">
+              <p class="font-semibold text-brand-gold mb-2">Przykład – pełne zdanie:</p>
+              <div class="code-example" onclick="copyToClipboard(this)" data-copy="Kompleksowa Usługa <span class=\"text-brand-gold\">Brukarska</span>">
+                Kompleksowa Usługa &lt;span class="text-brand-gold"&gt;Brukarska&lt;/span&gt;
+              </div>
+            </div>
+
+            <div class="ml-4 space-y-2 text-sm">
+              <p class="text-gray-300"><strong>Standard (całość biała):</strong></p>
+              <p class="italic text-gray-400">Kompleksowa Usługa Brukarska</p>
+              
+              <p class="text-gray-300 mt-3"><strong>Ze złotym słowem:</strong></p>
+              <p class="italic text-gray-400">Kompleksowa Usługa <span class="text-brand-gold">Brukarska</span></p>
+              <p class="text-xs text-gray-500 mt-1">(słowo "Brukarska" będzie złote na stronie)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Images section -->
+        <div>
+          <h3 class="text-white font-bold text-lg mb-2">🖼️ Jak dodać zdjęcie?</h3>
+          <ol class="list-decimal list-inside space-y-2 ml-4">
+            <li>Kliknij przycisk <span class="inline-block px-2 py-1 bg-gray-700 rounded text-xs">📸 Generuj link z pliku</span></li>
+            <li>Wgraj plik na serwer postimages.org</li>
+            <li>Skopiuj <strong>"Link bezpośredni"</strong> z postimages</li>
+            <li>Wklej go w pole tekstowe zdjęcia</li>
+          </ol>
+          <p class="text-sm text-gray-400 mt-2 ml-4">
+            <strong>Ważne:</strong> Po wklejeniu linku koniecznie kliknij <span class="inline-block px-2 py-1 bg-brand-gold text-black font-semibold rounded text-sm">Zapisz sekcję</span>!
           </p>
-          <p class="text-blue-200 leading-relaxed">
-            <strong class="text-white">💡 Wskazówka kolorystyczna:</strong> W sekcjach tytułowych możesz używać kodu <code class="inline-block bg-black/50 px-2 py-0.5 rounded text-sm text-brand-gold border border-gray-700">&lt;span class="text-brand-gold"&gt;...&lt;/span&gt;</code> (szczegóły znajdziesz bezpośrednio pod polami edycji tytułów).
+        </div>
+
+        <!-- Save section -->
+        <div>
+          <h3 class="text-white font-bold text-lg mb-2">💾 Zapisywanie zmian</h3>
+          <p class="leading-relaxed">
+            Po każdej edycji w danej sekcji kliknij przycisk <span class="inline-block px-2 py-1 bg-brand-gold text-black font-semibold rounded text-sm mx-1">Zapisz sekcję</span>. 
+            Zmiany pojawią się na stronie natychmiast po zapisie. Nie ma przycisku "Zapisz wszystkie" – każdą sekcję zapisuj osobno.
           </p>
         </div>
       </div>
-    </div>
+    </details>
 
     <!-- Success Toast -->
     <div id="toast" class="hidden">
@@ -981,43 +1382,11 @@ function generateSections(cmsData) {
           </a>
         </div>`;
       } else {
-        // Title field with enhanced HTML hint - two copy options
-        const titleHint = isTitle ? `
-          <div class="title-hint-box">
-            <p class="hint-header">
-              ✨ Jak zrobić złoty napis?
-            </p>
-            
-            <div class="option-a" style="margin-bottom: 1rem;">
-              <p class="option-label"><span style="display:inline-flex;align-items:center;justify-content:center;width:1.25rem;height:1.25rem;background:#60a5fa;color:#0a0a0a;border-radius:50%;font-weight:700;font-size:0.75rem;margin-right:0.5rem;">A</span>Skopiuj sam kod koloru:</p>
-              <p class="option-desc">(wklej go w edytor i zmień napis wewnątrz)</p>
-              <div class="code-box" onclick="copyToClipboard(this)" data-copy="<span class=\"text-brand-gold\">TU TWOJE SŁOWO</span>">
-                &lt;span class="text-brand-gold"&gt;TU TWOJE SŁOWO&lt;/span&gt;
-              </div>
-            </div>
-            
-            <div class="option-b" style="margin-bottom: 1rem;">
-              <p class="option-label"><span style="display:inline-flex;align-items:center;justify-content:center;width:1.25rem;height:1.25rem;background:#60a5fa;color:#0a0a0a;border-radius:50%;font-weight:700;font-size:0.75rem;margin-right:0.5rem;">B</span>Przykład gotowego całego zdania:</p>
-              <p class="option-desc">(skopiuj całość i dostosuj do swoich potrzeb)</p>
-              <div class="code-box" onclick="copyToClipboard(this)" data-copy="Kompleksowa Usługa <span class=\"text-brand-gold\">Brukarska</span>">
-                Kompleksowa Usługa &lt;span class="text-brand-gold"&gt;Brukarska&lt;/span&gt;
-              </div>
-            </div>
-            
-            <div class="explanation">
-              <strong>💡 Jak używać:</strong> Skopiuj wybrany kod, wklej go w pole edycji tytułu i zamień napis 
-              <code style="background:rgba(0,0,0,0.3);padding:0.125rem 0.375rem;border-radius:0.25rem;color:#a5f3fc;">"TU TWOJE SŁOWO"</code> lub 
-              <code style="background:rgba(0,0,0,0.3);padding:0.125rem 0.375rem;border-radius:0.25rem;color:#a5f3fc;">"Brukarska"</code> 
-              na własny tekst. Dzięki temu wybrany wyraz będzie złoty na stronie. <strong>Nie usuwaj znaczników &lt; &gt;</strong>.
-            </div>
-          </div>
-        ` : '';
-        
+        // Title field - clean, without hints (instructions are in accordion banner)
         return `
         <div class="field-group">
           <label class="field-label">${label}</label>
           <textarea name="${fieldKey}" class="cms-textarea" placeholder="Treść...">${escapeHtml(value)}</textarea>
-          ${titleHint}
         </div>`;
       }
     }).join('');
