@@ -424,6 +424,133 @@ async function adminPanel(request, env) {
       font-size: 0.875rem;
       line-height: 1.5;
     }
+    .title-hint-box .step-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.5rem;
+      height: 1.5rem;
+      background: #60a5fa;
+      color: #0a0a0a;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 0.75rem;
+      margin-right: 0.5rem;
+    }
+    .title-hint-box .example-box {
+      background: #0a0a0a;
+      border: 2px solid #374151;
+      border-radius: 0.5rem;
+      padding: 1rem 1rem 1rem 2.5rem;
+      margin: 0.75rem 0;
+      font-family: 'Inter', 'Consolas', 'Monaco', monospace;
+      font-size: 0.875rem;
+      color: #fef3c7;
+      position: relative;
+      overflow-x: auto;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s;
+      z-index: 1;
+      user-select: all;
+    }
+    .title-hint-box .example-box:hover {
+      border-color: #d4a84b;
+      background: #111111;
+      transform: translateX(4px);
+    }
+    .title-hint-box .example-box::before {
+      content: '📋';
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.6;
+      font-size: 1rem;
+    }
+    .title-hint-box .example-code {
+      color: #fef3c7;
+      display: inline;
+    }
+    .title-hint-box .gold-word {
+      color: #d4a84b;
+      font-weight: 600;
+      display: inline;
+    }
+    .title-hint-box .explanation {
+      color: #9ca3af;
+      font-size: 0.8125rem;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+    .copy-feedback {
+      position: fixed;
+      top: 1rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100%);
+      background: #10b981;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 1000;
+      font-weight: 600;
+      animation: copySlideDown 0.3s ease forwards;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    @keyframes copySlideDown {
+      from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+      to { transform: translateX(-50%) translateY(0); opacity: 1; }
+    }
+    @keyframes copySlideUp {
+      from { transform: translateX(-50%) translateY(0); opacity: 1; }
+      to { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+    }
+    .success-toast {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: #10b981;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 1000;
+      animation: slideIn 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    .admin-header {
+      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+      border-bottom: 1px solid #d4a84b30;
+      padding: 1.5rem 0;
+      margin-bottom: 2rem;
+    }
+    @keyframes checkBounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+    .title-hint-box {
+      margin-top: 0.75rem;
+      padding: 1rem;
+      background: linear-gradient(135deg, #1e3a5f 0%, #0f2942 100%);
+      border-left: 4px solid #60a5fa;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .title-hint-box p {
+      margin-bottom: 0.75rem;
+      color: #e0f2fe;
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
     .title-hint-box .example-box {
       background: #0a0a0a;
       border: 1px solid #374151;
@@ -601,6 +728,41 @@ async function adminPanel(request, env) {
     // Open postimages.org in new tab
     function openPostimages() {
       window.open('https://postimages.org/', '_blank');
+    }
+
+    // Copy code snippet to clipboard
+    function copyToClipboard(element) {
+      const codeToCopy = element.getAttribute('data-copy');
+      navigator.clipboard.writeText(codeToCopy).then(() => {
+        showCopyFeedback();
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+        // Fallback
+        const textArea = document.createElement('textarea');
+        textArea.value = codeToCopy;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        showCopyFeedback();
+      });
+    }
+
+    function showCopyFeedback() {
+      // Remove existing feedback if any
+      const existing = document.getElementById('copyFeedback');
+      if (existing) existing.remove();
+
+      const feedback = document.createElement('div');
+      feedback.id = 'copyFeedback';
+      feedback.className = 'copy-feedback';
+      feedback.innerHTML = '<i class="fas fa-check"></i> Skopiowano!';
+      document.body.appendChild(feedback);
+
+      setTimeout(() => {
+        feedback.style.animation = 'copySlideUp 0.3s ease forwards';
+        setTimeout(() => feedback.remove(), 300);
+      }, 1500);
     }
   </script>
 </body>
@@ -821,14 +983,12 @@ function generateSections(cmsData) {
         // Title field with enhanced HTML hint
         const titleHint = isTitle ? `
           <div class="title-hint-box">
-            <p class="mb-2"><i class="fas fa-magic text-brand-gold mr-2"></i><strong>Jak dodać złoty kolor?</strong> Wklej poniższy kod, zamieniając treść między znacznikami na własną:</p>
-            <div class="example-box">
-              <span class="example-code">Kompleksowa Usługa <span class="gold-word">Brukarska</span></span>
+            <p class="mb-3"><span class="step-number">1</span>Skopiuj poniższy kod.</p>
+            <div class="example-box" onclick="copyToClipboard(this)" data-copy="Kompleksowa Usługa <span class=\\"text-brand-gold\\">Brukarska</span>">
+              <span class="example-code">Kompleksowa Usługa &lt;span class="text-brand-gold"&gt;Brukarska&lt;/span&gt;</span>
             </div>
-            <p class="explanation">
-              W powyższym przykładzie słowo <span class="gold-word">Brukarska</span> zostanie wyświetlone na złoto. 
-              Możesz tak wyróżnić dowolne słowo w tytule.
-            </p>
+            <p class="mb-2"><span class="step-number">2</span>Wklej go w pole edycji tytułu.</p>
+            <p class="mb-0"><span class="step-number">3</span>Zmień słowo <span class="gold-word">"Brukarska"</span> na własne, <strong>nie usuwając znaczników</strong> &lt;&gt;.</p>
           </div>
         ` : '';
         
