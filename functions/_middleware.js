@@ -410,6 +410,57 @@ async function adminPanel(request, env) {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.3); }
     }
+    .title-hint-box {
+      margin-top: 0.75rem;
+      padding: 1rem;
+      background: linear-gradient(135deg, #1e3a5f 0%, #0f2942 100%);
+      border-left: 4px solid #60a5fa;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .title-hint-box p {
+      margin-bottom: 0.75rem;
+      color: #e0f2fe;
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+    .title-hint-box .example-box {
+      background: #0a0a0a;
+      border: 1px solid #374151;
+      border-radius: 0.5rem;
+      padding: 0.875rem 1rem;
+      margin: 0.75rem 0;
+      font-family: 'Inter', monospace;
+      font-size: 0.875rem;
+      color: #fef3c7;
+      position: relative;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .title-hint-box .example-box::before {
+      content: '📋';
+      position: absolute;
+      right: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.5;
+      font-size: 0.875rem;
+    }
+    .title-hint-box .example-code {
+      color: #fef3c7;
+      display: inline;
+    }
+    .title-hint-box .gold-word {
+      color: #d4a84b;
+      font-weight: 600;
+      display: inline;
+    }
+    .title-hint-box .explanation {
+      color: #9ca3af;
+      font-size: 0.8125rem;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
     .success-toast {
       position: fixed;
       top: 1rem;
@@ -472,8 +523,11 @@ async function adminPanel(request, env) {
           <p class="text-gray-200 leading-relaxed mb-3">
             <strong class="text-white">Aby dodać zdjęcie:</strong> Kliknij przycisk "Generuj link z pliku", wgraj plik na zewnętrzny serwer (postimages.org), skopiuj <em>"Link bezpośredni"</em> i wklej go w pole tekstowe.
           </p>
-          <p class="text-gray-300 leading-relaxed">
+          <p class="text-gray-300 leading-relaxed mb-3">
             <strong class="text-white">Zapisywanie zmian:</strong> Po każdej edycji w danej sekcji musisz kliknąć przycisk <span class="inline-block px-2 py-1 bg-brand-gold text-black font-semibold rounded text-sm mx-1">Zapisz sekcję</span>, aby zmiany zostały opublikowane na stronie.
+          </p>
+          <p class="text-blue-200 leading-relaxed">
+            <strong class="text-white">💡 Wskazówka kolorystyczna:</strong> W sekcjach tytułowych możesz używać kodu <code class="inline-block bg-black/50 px-2 py-0.5 rounded text-sm text-brand-gold border border-gray-700">&lt;span class="text-brand-gold"&gt;...&lt;/span&gt;</code> (szczegóły znajdziesz bezpośrednio pod polami edycji tytułów).
           </p>
         </div>
       </div>
@@ -565,7 +619,7 @@ const CMS_SECTIONS = [
     icon: 'fas fa-home',
     fields: ['hero_title', 'hero_subtitle', 'hero_cta1', 'hero_cta2', 'hero_bg_image', 'header_logo', 'header_tagline'],
     imageFields: ['hero_bg_image', 'header_logo'],
-    titleFields: ['hero_title'],
+    titleFields: ['hero_title', 'header_tagline'],
     fieldLabels: {
       'hero_title': 'Tytuł główny strony (Hero)',
       'hero_subtitle': 'Podtytuł / opis sekcji Hero',
@@ -720,10 +774,10 @@ const CMS_SECTIONS = [
     icon: 'fas fa-shoe-prints',
     fields: ['footer_copyright', 'footer_subtitle', 'footer_address'],
     imageFields: [],
-    titleFields: ['footer_copyright', 'footer_subtitle'],
+    titleFields: ['footer_subtitle'],
     fieldLabels: {
       'footer_copyright': 'Tekst copyright (np. "© 2026 Maciej Opas...")',
-      'footer_subtitle': 'Podtytuł w stopce (np. "Kostka Brukowa")',
+      'footer_subtitle': 'Podtytuł w stopce (np. "Kostka Brukowa") - możliwość kolorowania',
       'footer_address': 'Adres / zasięg działania'
     }
   }
@@ -764,12 +818,18 @@ function generateSections(cmsData) {
           </a>
         </div>`;
       } else {
-        // Title field with HTML hint
+        // Title field with enhanced HTML hint
         const titleHint = isTitle ? `
-          <p class="field-hint" style="color: #60a5fa; background: #1e3a5f; padding: 0.5rem; border-radius: 0.375rem; margin-top: 0.5rem;">
-            <i class="fas fa-code"></i> <strong>Wskazówka:</strong> Aby uzyskać złoty kolor słowa, użyj: 
-            <code class="bg-black px-1 py-0.5 rounded text-sm">&lt;span class="text-brand-gold"&gt;Twoje Słowo&lt;/span&gt;</code>
-          </p>
+          <div class="title-hint-box">
+            <p class="mb-2"><i class="fas fa-magic text-brand-gold mr-2"></i><strong>Jak dodać złoty kolor?</strong> Wklej poniższy kod, zamieniając treść między znacznikami na własną:</p>
+            <div class="example-box">
+              <span class="example-code">Kompleksowa Usługa <span class="gold-word">Brukarska</span></span>
+            </div>
+            <p class="explanation">
+              W powyższym przykładzie słowo <span class="gold-word">Brukarska</span> zostanie wyświetlone na złoto. 
+              Możesz tak wyróżnić dowolne słowo w tytule.
+            </p>
+          </div>
         ` : '';
         
         return `
