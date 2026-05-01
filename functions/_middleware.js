@@ -661,7 +661,7 @@ async function adminPanel(request, env) {
             <li>Wklej go w pole tekstowe zdjęcia</li>
           </ol>
           <p class="text-sm text-gray-400 mt-3 ml-4">
-            <strong>Ważne:</strong> Po wklejeniu linku koniecznie kliknij <span class="inline-block px-2 py-1 bg-gray-800 text-white font-semibold rounded text-sm border border-gray-600">Zapisz sekcję</span>!
+            <strong>Ważne:</strong> Po wklejeniu linku koniecznie kliknij <span class="inline-block px-2 py-1 bg-black text-white font-semibold rounded text-sm border border-gray-600">Zapisz sekcję</span>!
           </p>
         </div>
 
@@ -669,7 +669,7 @@ async function adminPanel(request, env) {
         <div class="mb-6">
           <h3 class="text-white font-bold text-lg mb-2">💾 Zapisywanie zmian</h3>
           <p class="leading-relaxed text-gray-300">
-            Po każdej edycji w danej sekcji kliknij przycisk <span class="inline-block px-2 py-1 bg-gray-800 text-white font-semibold rounded text-sm mx-1 border border-gray-600">Zapisz sekcję</span>. 
+            Po każdej edycji w danej sekcji kliknij przycisk <span class="inline-block px-2 py-1 bg-black text-white font-semibold rounded text-sm mx-1 border border-gray-600">Zapisz sekcję</span>. 
             Zmiany pojawią się na stronie natychmiast po zapisie. Nie ma przycisku "Zapisz wszystkie" – każdą sekcję zapisuj osobno.
           </p>
         </div>
