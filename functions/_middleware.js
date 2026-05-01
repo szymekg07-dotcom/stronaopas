@@ -418,70 +418,71 @@ async function adminPanel(request, env) {
       border-radius: 0.5rem;
       box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
-    .title-hint-box p {
-      margin-bottom: 0.75rem;
+    .title-hint-box .hint-header {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #fef3c7;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .title-hint-box .option-label {
+      font-weight: 600;
+      color: #60a5fa;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+    }
+    .title-hint-box .option-desc {
       color: #e0f2fe;
       font-size: 0.875rem;
-      line-height: 1.5;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
     }
-    .title-hint-box .step-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 1.5rem;
-      height: 1.5rem;
-      background: #60a5fa;
-      color: #0a0a0a;
-      border-radius: 50%;
-      font-weight: 700;
-      font-size: 0.75rem;
-      margin-right: 0.5rem;
-    }
-    .title-hint-box .example-box {
+    .title-hint-box .code-box {
       background: #0a0a0a;
       border: 2px solid #374151;
       border-radius: 0.5rem;
-      padding: 1rem 1rem 1rem 2.5rem;
-      margin: 0.75rem 0;
-      font-family: 'Inter', 'Consolas', 'Monaco', monospace;
-      font-size: 0.875rem;
-      color: #fef3c7;
+      padding: 0.875rem 1rem;
+      margin: 0.5rem 0 1rem 0;
+      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+      font-size: 0.8125rem;
+      color: #a5f3fc;
       position: relative;
       overflow-x: auto;
-      white-space: nowrap;
+      white-space: pre-wrap;
+      word-break: break-word;
       cursor: pointer;
       transition: all 0.2s;
-      z-index: 1;
-      user-select: all;
+      line-height: 1.5;
     }
-    .title-hint-box .example-box:hover {
-      border-color: #d4a84b;
+    .title-hint-box .code-box:hover {
+      border-color: #60a5fa;
       background: #111111;
-      transform: translateX(4px);
     }
-    .title-hint-box .example-box::before {
+    .title-hint-box .code-box::before {
       content: '📋';
       position: absolute;
-      left: 0.75rem;
-      top: 50%;
-      transform: translateY(-50%);
-      opacity: 0.6;
-      font-size: 1rem;
-    }
-    .title-hint-box .example-code {
-      color: #fef3c7;
-      display: inline;
-    }
-    .title-hint-box .gold-word {
-      color: #d4a84b;
-      font-weight: 600;
-      display: inline;
+      top: 0.5rem;
+      right: 0.75rem;
+      opacity: 0.4;
+      font-size: 0.875rem;
     }
     .title-hint-box .explanation {
       color: #9ca3af;
       font-size: 0.8125rem;
-      margin-top: 0.5rem;
-      font-style: italic;
+      margin-top: 0.75rem;
+      line-height: 1.5;
+      padding: 0.75rem;
+      background: rgba(0,0,0,0.2);
+      border-radius: 0.375rem;
+      border-left: 3px solid #60a5fa;
+    }
+    .title-hint-box .explanation strong {
+      color: #e5e5e5;
     }
     .copy-feedback {
       position: fixed;
@@ -980,15 +981,35 @@ function generateSections(cmsData) {
           </a>
         </div>`;
       } else {
-        // Title field with enhanced HTML hint
+        // Title field with enhanced HTML hint - two copy options
         const titleHint = isTitle ? `
           <div class="title-hint-box">
-            <p class="mb-3"><span class="step-number">1</span>Skopiuj poniższy kod.</p>
-            <div class="example-box" onclick="copyToClipboard(this)" data-copy="Kompleksowa Usługa <span class=\\"text-brand-gold\\">Brukarska</span>">
-              <span class="example-code">Kompleksowa Usługa &lt;span class="text-brand-gold"&gt;Brukarska&lt;/span&gt;</span>
+            <p class="hint-header">
+              ✨ Jak zrobić złoty napis?
+            </p>
+            
+            <div class="option-a" style="margin-bottom: 1rem;">
+              <p class="option-label"><span style="display:inline-flex;align-items:center;justify-content:center;width:1.25rem;height:1.25rem;background:#60a5fa;color:#0a0a0a;border-radius:50%;font-weight:700;font-size:0.75rem;margin-right:0.5rem;">A</span>Skopiuj sam kod koloru:</p>
+              <p class="option-desc">(wklej go w edytor i zmień napis wewnątrz)</p>
+              <div class="code-box" onclick="copyToClipboard(this)" data-copy="<span class=\"text-brand-gold\">TU TWOJE SŁOWO</span>">
+                &lt;span class="text-brand-gold"&gt;TU TWOJE SŁOWO&lt;/span&gt;
+              </div>
             </div>
-            <p class="mb-2"><span class="step-number">2</span>Wklej go w pole edycji tytułu.</p>
-            <p class="mb-0"><span class="step-number">3</span>Zmień słowo <span class="gold-word">"Brukarska"</span> na własne, <strong>nie usuwając znaczników</strong> &lt;&gt;.</p>
+            
+            <div class="option-b" style="margin-bottom: 1rem;">
+              <p class="option-label"><span style="display:inline-flex;align-items:center;justify-content:center;width:1.25rem;height:1.25rem;background:#60a5fa;color:#0a0a0a;border-radius:50%;font-weight:700;font-size:0.75rem;margin-right:0.5rem;">B</span>Przykład gotowego całego zdania:</p>
+              <p class="option-desc">(skopiuj całość i dostosuj do swoich potrzeb)</p>
+              <div class="code-box" onclick="copyToClipboard(this)" data-copy="Kompleksowa Usługa <span class=\"text-brand-gold\">Brukarska</span>">
+                Kompleksowa Usługa &lt;span class="text-brand-gold"&gt;Brukarska&lt;/span&gt;
+              </div>
+            </div>
+            
+            <div class="explanation">
+              <strong>💡 Jak używać:</strong> Skopiuj wybrany kod, wklej go w pole edycji tytułu i zamień napis 
+              <code style="background:rgba(0,0,0,0.3);padding:0.125rem 0.375rem;border-radius:0.25rem;color:#a5f3fc;">"TU TWOJE SŁOWO"</code> lub 
+              <code style="background:rgba(0,0,0,0.3);padding:0.125rem 0.375rem;border-radius:0.25rem;color:#a5f3fc;">"Brukarska"</code> 
+              na własny tekst. Dzięki temu wybrany wyraz będzie złoty na stronie. <strong>Nie usuwaj znaczników &lt; &gt;</strong>.
+            </div>
           </div>
         ` : '';
         
