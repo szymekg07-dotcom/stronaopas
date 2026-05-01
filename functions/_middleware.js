@@ -269,9 +269,9 @@ const ALL_CMS_FIELDS = [
   "equipment_intro","equipment1_img","equipment2_img","equipment3_img",
   "testimonials_intro","testimonial1","testimonial2","testimonial3",
   "faq_title","faq_q1","faq_a1","faq_q2","faq_a2","faq_q3","faq_a3","faq_q4","faq_a4",
-  "contact_intro",
+  "contact_intro","contact_phone","contact_email",
   "footer_copyright","footer_subtitle","footer_address","header_logo","header_tagline",
-  "realizacje_intro",
+  "realizacje_intro","realizacje_title",
   "gallery_1","gallery_10","gallery_11","gallery_12","gallery_13","gallery_14","gallery_15","gallery_16","gallery_17","gallery_18","gallery_19","gallery_20","gallery_2","gallery_3","gallery_4","gallery_5","gallery_6","gallery_7","gallery_8","gallery_9"
 ];
 
@@ -463,6 +463,22 @@ async function adminPanel(request, env) {
       </div>
     </div>
 
+    <!-- Instruction Banner -->
+    <div class="mb-8 p-6 bg-gradient-to-r from-blue-900/30 to-purple-900/30 border-2 border-blue-500/50 rounded-xl shadow-lg">
+      <div class="flex items-start gap-4">
+        <div class="text-2xl mt-1">💡</div>
+        <div class="flex-1">
+          <h3 class="text-lg font-bold text-blue-300 mb-2">Instrukcja</h3>
+          <p class="text-gray-200 leading-relaxed mb-3">
+            <strong class="text-white">Aby dodać zdjęcie:</strong> Kliknij przycisk "Generuj link z pliku", wgraj plik na zewnętrzny serwer (postimages.org), skopiuj <em>"Link bezpośredni"</em> i wklej go w pole tekstowe.
+          </p>
+          <p class="text-gray-300 leading-relaxed">
+            <strong class="text-white">Zapisywanie zmian:</strong> Po każdej edycji w danej sekcji musisz kliknąć przycisk <span class="inline-block px-2 py-1 bg-brand-gold text-black font-semibold rounded text-sm mx-1">Zapisz sekcję</span>, aby zmiany zostały opublikowane na stronie.
+          </p>
+        </div>
+      </div>
+    </div>
+
     <!-- Success Toast -->
     <div id="toast" class="hidden">
       <i class="fas fa-check-circle text-xl"></i>
@@ -549,6 +565,7 @@ const CMS_SECTIONS = [
     icon: 'fas fa-home',
     fields: ['hero_title', 'hero_subtitle', 'hero_cta1', 'hero_cta2', 'hero_bg_image', 'header_logo', 'header_tagline'],
     imageFields: ['hero_bg_image', 'header_logo'],
+    titleFields: ['hero_title'],
     fieldLabels: {
       'hero_title': 'Tytuł główny strony (Hero)',
       'hero_subtitle': 'Podtytuł / opis sekcji Hero',
@@ -567,9 +584,11 @@ const CMS_SECTIONS = [
     id: 'realizacje',
     title: 'Sekcja Realizacje',
     icon: 'fas fa-images',
-    fields: ['realizacje_intro'],
+    fields: ['realizacje_title', 'realizacje_intro'],
     imageFields: [],
+    titleFields: ['realizacje_title'],
     fieldLabels: {
+      'realizacje_title': 'Tytuł sekcji Realizacje',
       'realizacje_intro': 'Wstępny opis pod tytułem sekcji Realizacje'
     }
   },
@@ -579,6 +598,7 @@ const CMS_SECTIONS = [
     icon: 'fas fa-users',
     fields: ['about_title', 'about_text1', 'about_text2', 'about_img1', 'about_img2'],
     imageFields: ['about_img1', 'about_img2'],
+    titleFields: ['about_title'],
     fieldLabels: {
       'about_title': 'Tytuł sekcji "O Nas"',
       'about_text1': 'Tekst - akapit 1 (kim jesteśmy, misja)',
@@ -597,6 +617,7 @@ const CMS_SECTIONS = [
     icon: 'fas fa-concierge-bell',
     fields: ['services_title', 'services_intro', 'service1_title', 'service1_desc', 'service1_img', 'service2_title', 'service2_desc', 'service2_img', 'service3_title', 'service3_desc', 'service3_img', 'cta_title', 'cta_text'],
     imageFields: ['service1_img', 'service2_img', 'service3_img'],
+    titleFields: ['services_title', 'service1_title', 'service2_title', 'service3_title', 'cta_title'],
     fieldLabels: {
       'services_title': 'Tytuł sekcji Oferta',
       'services_intro': 'Wstępny opis oferty (pod tytułem)',
@@ -624,6 +645,7 @@ const CMS_SECTIONS = [
     icon: 'fas fa-truck',
     fields: ['equipment_intro', 'equipment1_img', 'equipment2_img', 'equipment3_img'],
     imageFields: ['equipment1_img', 'equipment2_img', 'equipment3_img'],
+    titleFields: [],
     fieldLabels: {
       'equipment_intro': 'Wstęp do sekcji Sprzęt',
       'equipment1_img': 'Sprzęt 1 - zdjęcie maszyny',
@@ -642,6 +664,7 @@ const CMS_SECTIONS = [
     icon: 'fas fa-images',
     fields: ['gallery_1','gallery_2','gallery_3','gallery_4','gallery_5','gallery_6','gallery_7','gallery_8','gallery_9','gallery_10','gallery_11','gallery_12','gallery_13','gallery_14','gallery_15','gallery_16','gallery_17','gallery_18','gallery_19','gallery_20'],
     imageFields: ['gallery_1','gallery_2','gallery_3','gallery_4','gallery_5','gallery_6','gallery_7','gallery_8','gallery_9','gallery_10','gallery_11','gallery_12','gallery_13','gallery_14','gallery_15','gallery_16','gallery_17','gallery_18','gallery_19','gallery_20'],
+    titleFields: [],
     fieldLabels: (key) => `Galeria - zdjęcie nr ${key.replace('gallery_', '')}`,
     imageSizes: (key) => 'Rekomendowane: 800x600px'
   },
@@ -651,6 +674,7 @@ const CMS_SECTIONS = [
     icon: 'fas fa-star',
     fields: ['testimonials_intro', 'testimonial1', 'testimonial2', 'testimonial3'],
     imageFields: [],
+    titleFields: [],
     fieldLabels: {
       'testimonials_intro': 'Wstęp do sekcji Opinie',
       'testimonial1': 'Treść opinii 1',
@@ -664,6 +688,7 @@ const CMS_SECTIONS = [
     icon: 'fas fa-question-circle',
     fields: ['faq_title', 'faq_q1', 'faq_a1', 'faq_q2', 'faq_a2', 'faq_q3', 'faq_a3', 'faq_q4', 'faq_a4'],
     imageFields: [],
+    titleFields: ['faq_title'],
     fieldLabels: {
       'faq_title': 'Tytuł sekcji FAQ',
       'faq_q1': 'Pytanie 1',
@@ -680,10 +705,13 @@ const CMS_SECTIONS = [
     id: 'contact',
     title: 'Sekcja Kontakt',
     icon: 'fas fa-phone',
-    fields: ['contact_intro'],
+    fields: ['contact_intro', 'contact_phone', 'contact_email'],
     imageFields: [],
+    titleFields: [],
     fieldLabels: {
-      'contact_intro': 'Wstępny tekst pod tytułem sekcji Kontakt'
+      'contact_intro': 'Wstępny tekst pod tytułem sekcji Kontakt',
+      'contact_phone': 'Numer telefonu (do wyświetlenia)',
+      'contact_email': 'Adres email (do wyświetlenia)'
     }
   },
   {
@@ -692,6 +720,7 @@ const CMS_SECTIONS = [
     icon: 'fas fa-shoe-prints',
     fields: ['footer_copyright', 'footer_subtitle', 'footer_address'],
     imageFields: [],
+    titleFields: ['footer_copyright', 'footer_subtitle'],
     fieldLabels: {
       'footer_copyright': 'Tekst copyright (np. "© 2026 Maciej Opas...")',
       'footer_subtitle': 'Podtytuł w stopce (np. "Kostka Brukowa")',
@@ -706,12 +735,11 @@ function generateSections(cmsData) {
     const title = section.title;
     const icon = section.icon;
     
-    // Filter fields that exist in cmsData (some might not be used yet)
-    const existingFields = section.fields.filter(field => field in cmsData);
-    
-    const fieldsHtml = existingFields.map(fieldKey => {
+    // Show ALL fields defined in section, even if not in cmsData yet (use empty string)
+    const fieldsHtml = section.fields.map(fieldKey => {
       const value = cmsData[fieldKey] || '';
       const isImage = section.imageFields.includes(fieldKey);
+      const isTitle = section.titleFields && section.titleFields.includes(fieldKey);
       const label = typeof section.fieldLabels === 'function' 
         ? section.fieldLabels(fieldKey) 
         : (section.fieldLabels[fieldKey] || formatLabel(fieldKey));
@@ -736,10 +764,19 @@ function generateSections(cmsData) {
           </a>
         </div>`;
       } else {
+        // Title field with HTML hint
+        const titleHint = isTitle ? `
+          <p class="field-hint" style="color: #60a5fa; background: #1e3a5f; padding: 0.5rem; border-radius: 0.375rem; margin-top: 0.5rem;">
+            <i class="fas fa-code"></i> <strong>Wskazówka:</strong> Aby uzyskać złoty kolor słowa, użyj: 
+            <code class="bg-black px-1 py-0.5 rounded text-sm">&lt;span class="text-brand-gold"&gt;Twoje Słowo&lt;/span&gt;</code>
+          </p>
+        ` : '';
+        
         return `
         <div class="field-group">
           <label class="field-label">${label}</label>
           <textarea name="${fieldKey}" class="cms-textarea" placeholder="Treść...">${escapeHtml(value)}</textarea>
+          ${titleHint}
         </div>`;
       }
     }).join('');
