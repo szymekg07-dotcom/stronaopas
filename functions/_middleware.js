@@ -288,36 +288,6 @@ function loginPage() {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.3); }
     }
-    .code-example {
-      background: #0a0a0a;
-      border: 2px solid #374151;
-      border-radius: 0.5rem;
-      padding: 0.875rem 1rem;
-      margin: 0.5rem 0;
-      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-      font-size: 0.8125rem;
-      color: #a5f3fc;
-      position: relative;
-      overflow-x: auto;
-      white-space: pre-wrap;
-      word-break: break-word;
-      cursor: pointer;
-      transition: all 0.2s;
-      line-height: 1.5;
-      user-select: all;
-    }
-    .code-example:hover {
-      border-color: #60a5fa;
-      background: #111111;
-    }
-    .code-example::before {
-      content: '📋';
-      position: absolute;
-      top: 0.5rem;
-      right: 0.75rem;
-      opacity: 0.4;
-      font-size: 0.875rem;
-    }
     .success-toast {
       position: fixed;
       top: 1rem;
@@ -336,31 +306,6 @@ function loginPage() {
     @keyframes slideIn {
       from { transform: translateX(100%); opacity: 0; }
       to { transform: translateX(0); opacity: 1; }
-    }
-    .copy-feedback {
-      position: fixed;
-      top: 1rem;
-      left: 50%;
-      transform: translateX(-50%) translateY(-100%);
-      background: #10b981;
-      color: white;
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      z-index: 1000;
-      font-weight: 600;
-      animation: copySlideDown 0.3s ease forwards;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    @keyframes copySlideDown {
-      from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
-      to { transform: translateX(-50%) translateY(0); opacity: 1; }
-    }
-    @keyframes copySlideUp {
-      from { transform: translateX(-50%) translateY(0); opacity: 1; }
-      to { transform: translateX(-50%) translateY(-100%); opacity: 0; }
     }
     .admin-header {
       background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
@@ -484,479 +429,135 @@ async function adminPanel(request, env) {
   <title>Panel CMS - OPAS</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-  <style>
-    body { font-family: 'Inter', sans-serif; background: #0a0a0a; }
-    .cms-input, .cms-textarea {
-      width: 100%;
-      padding: 0.75rem;
-      background: #1a1a1a;
-      border: 2px solid #374151;
-      border-radius: 0.5rem;
-      color: white;
-      font-size: 0.875rem;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .cms-input:focus, .cms-textarea:focus {
-      outline: none;
-      border-color: #d4a84b;
-      box-shadow: 0 0 0 3px rgba(212, 168, 75, 0.2);
-    }
-    .cms-textarea { min-height: 120px; resize: vertical; }
-    .section-card {
-      background: linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%);
-      border: 1px solid #2a2a2a;
-      border-radius: 1rem;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      transition: border-color 0.3s, box-shadow 0.3s;
-    }
-    .section-card:hover {
-      border-color: #d4a84b40;
-    }
-    .section-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #d4a84b;
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 2px solid #d4a84b30;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .field-group {
-      margin-bottom: 1.5rem;
-      padding: 1.25rem;
-      background: #0a0a0a;
-      border-radius: 0.75rem;
-      border: 1px solid #1f1f1f;
-    }
-    .field-label {
-      display: block;
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: #e5e5e5;
-      margin-bottom: 0.5rem;
-    }
-    .field-hint {
-      font-size: 0.75rem;
-      color: #9ca3af;
-      margin-top: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .btn-generate {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      background: #374151;
-      color: white;
-      border-radius: 0.5rem;
-      font-size: 0.75rem;
-      text-decoration: none;
-      transition: background 0.2s;
-      margin-top: 0.5rem;
-    }
-    .btn-generate:hover {
-      background: #4b5563;
-    }
-    .btn-save-section {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      background: #d4a84b;
-      color: black;
-      border: none;
-      border-radius: 0.5rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-      margin-top: 1rem;
-    }
-    .btn-save-section:hover {
-      background: #b8923a;
-      transform: translateY(-1px);
-    }
-    .btn-save-section.saved {
-      background: #10b981;
-      color: white;
-    }
-    .btn-save-section.saved i {
-      animation: checkBounce 0.5s ease;
-    }
-    @keyframes checkBounce {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.3); }
-    }
-    .code-example {
-      background: #0a0a0a;
-      border: 2px solid #374151;
-      border-radius: 0.5rem;
-      padding: 0.875rem 1rem;
-      margin: 0.5rem 0;
-      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-      font-size: 0.8125rem;
-      color: #a5f3fc;
-      position: relative;
-      overflow-x: auto;
-      white-space: pre-wrap;
-      word-break: break-word;
-      cursor: pointer;
-      transition: all 0.2s;
-      line-height: 1.5;
-      user-select: all;
-    }
-    .code-example:hover {
-      border-color: #60a5fa;
-      background: #111111;
-    }
-    .code-example::before {
-      content: '📋';
-      position: absolute;
-      top: 0.5rem;
-      right: 0.75rem;
-      opacity: 0.4;
-      font-size: 0.875rem;
-    }
-    .success-toast {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      background: #10b981;
-      color: white;
-      padding: 1rem 1.5rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      z-index: 1000;
-      animation: slideIn 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    @keyframes slideIn {
-      from { transform: translateX(100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-    .copy-feedback {
-      position: fixed;
-      top: 1rem;
-      left: 50%;
-      transform: translateX(-50%) translateY(-100%);
-      background: #10b981;
-      color: white;
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      z-index: 1000;
-      font-weight: 600;
-      animation: copySlideDown 0.3s ease forwards;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    @keyframes copySlideDown {
-      from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
-      to { transform: translateX(-50%) translateY(0); opacity: 1; }
-    }
-    @keyframes copySlideUp {
-      from { transform: translateX(-50%) translateY(0); opacity: 1; }
-      to { transform: translateX(-50%) translateY(-100%); opacity: 0; }
-    }
-    .admin-header {
-      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
-      border-bottom: 1px solid #d4a84b30;
-      padding: 1.5rem 0;
-      margin-bottom: 2rem;
-    }
-    .section-card:hover {
-      border-color: #d4a84b40;
-    }
-    .section-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #d4a84b;
-      margin-bottom: 1.5rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 2px solid #d4a84b30;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .field-group {
-      margin-bottom: 1.5rem;
-      padding: 1.25rem;
-      background: #0a0a0a;
-      border-radius: 0.75rem;
-      border: 1px solid #1f1f1f;
-    }
-    .field-label {
-      display: block;
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: #e5e5e5;
-      margin-bottom: 0.5rem;
-    }
-    .field-hint {
-      font-size: 0.75rem;
-      color: #9ca3af;
-      margin-top: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .btn-generate {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      background: #374151;
-      color: white;
-      border-radius: 0.5rem;
-      font-size: 0.75rem;
-      text-decoration: none;
-      transition: background 0.2s;
-      margin-top: 0.5rem;
-    }
-    .btn-generate:hover {
-      background: #4b5563;
-    }
-    .btn-save-section {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      background: #d4a84b;
-      color: black;
-      border: none;
-      border-radius: 0.5rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-      margin-top: 1rem;
-    }
-    .btn-save-section:hover {
-      background: #b8923a;
-      transform: translateY(-1px);
-    }
-    .btn-save-section.saved {
-      background: #10b981;
-      color: white;
-    }
-    .btn-save-section.saved i {
-      animation: checkBounce 0.5s ease;
-    }
-    @keyframes checkBounce {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.3); }
-    }
-    .title-hint-box {
-      margin-top: 0.75rem;
-      padding: 1rem;
-      background: linear-gradient(135deg, #1e3a5f 0%, #0f2942 100%);
-      border-left: 4px solid #60a5fa;
-      border-radius: 0.5rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    }
-    .title-hint-box .hint-header {
-      font-size: 1.125rem;
-      font-weight: 700;
-      color: #fef3c7;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .title-hint-box .option-label {
-      font-weight: 600;
-      color: #60a5fa;
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.875rem;
-    }
-    .title-hint-box .option-desc {
-      color: #e0f2fe;
-      font-size: 0.875rem;
-      margin-bottom: 0.5rem;
-      line-height: 1.4;
-    }
-    .title-hint-box .code-box {
-      background: #0a0a0a;
-      border: 2px solid #374151;
-      border-radius: 0.5rem;
-      padding: 0.875rem 1rem;
-      margin: 0.5rem 0 1rem 0;
-      font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-      font-size: 0.8125rem;
-      color: #a5f3fc;
-      position: relative;
-      overflow-x: auto;
-      white-space: pre-wrap;
-      word-break: break-word;
-      cursor: pointer;
-      transition: all 0.2s;
-      line-height: 1.5;
-    }
-    .title-hint-box .code-box:hover {
-      border-color: #60a5fa;
-      background: #111111;
-    }
-    .title-hint-box .code-box::before {
-      content: '📋';
-      position: absolute;
-      top: 0.5rem;
-      right: 0.75rem;
-      opacity: 0.4;
-      font-size: 0.875rem;
-    }
-    .title-hint-box .explanation {
-      color: #9ca3af;
-      font-size: 0.8125rem;
-      margin-top: 0.75rem;
-      line-height: 1.5;
-      padding: 0.75rem;
-      background: rgba(0,0,0,0.2);
-      border-radius: 0.375rem;
-      border-left: 3px solid #60a5fa;
-    }
-    .title-hint-box .explanation strong {
-      color: #e5e5e5;
-    }
-    .copy-feedback {
-      position: fixed;
-      top: 1rem;
-      left: 50%;
-      transform: translateX(-50%) translateY(-100%);
-      background: #10b981;
-      color: white;
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      z-index: 1000;
-      font-weight: 600;
-      animation: copySlideDown 0.3s ease forwards;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    @keyframes copySlideDown {
-      from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
-      to { transform: translateX(-50%) translateY(0); opacity: 1; }
-    }
-    @keyframes copySlideUp {
-      from { transform: translateX(-50%) translateY(0); opacity: 1; }
-      to { transform: translateX(-50%) translateY(-100%); opacity: 0; }
-    }
-    .success-toast {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      background: #10b981;
-      color: white;
-      padding: 1rem 1.5rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      z-index: 1000;
-      animation: slideIn 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    @keyframes slideIn {
-      from { transform: translateX(100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-    .admin-header {
-      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
-      border-bottom: 1px solid #d4a84b30;
-      padding: 1.5rem 0;
-      margin-bottom: 2rem;
-    }
-    @keyframes checkBounce {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.3); }
-    }
-    .title-hint-box {
-      margin-top: 0.75rem;
-      padding: 1rem;
-      background: linear-gradient(135deg, #1e3a5f 0%, #0f2942 100%);
-      border-left: 4px solid #60a5fa;
-      border-radius: 0.5rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-    }
-    .title-hint-box p {
-      margin-bottom: 0.75rem;
-      color: #e0f2fe;
-      font-size: 0.875rem;
-      line-height: 1.5;
-    }
-    .title-hint-box .example-box {
-      background: #0a0a0a;
-      border: 1px solid #374151;
-      border-radius: 0.5rem;
-      padding: 0.875rem 1rem;
-      margin: 0.75rem 0;
-      font-family: 'Inter', monospace;
-      font-size: 0.875rem;
-      color: #fef3c7;
-      position: relative;
-      overflow-x: auto;
-      white-space: nowrap;
-    }
-    .title-hint-box .example-box::before {
-      content: '📋';
-      position: absolute;
-      right: 0.75rem;
-      top: 50%;
-      transform: translateY(-50%);
-      opacity: 0.5;
-      font-size: 0.875rem;
-    }
-    .title-hint-box .example-code {
-      color: #fef3c7;
-      display: inline;
-    }
-    .title-hint-box .gold-word {
-      color: #d4a84b;
-      font-weight: 600;
-      display: inline;
-    }
-    .title-hint-box .explanation {
-      color: #9ca3af;
-      font-size: 0.8125rem;
-      margin-top: 0.5rem;
-      font-style: italic;
-    }
-    .success-toast {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
-      background: #10b981;
-      color: white;
-      padding: 1rem 1.5rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      z-index: 1000;
-      animation: slideIn 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    @keyframes slideIn {
-      from { transform: translateX(100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-    .admin-header {
-      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
-      border-bottom: 1px solid #d4a84b30;
-      padding: 1.5rem 0;
-      margin-bottom: 2rem;
-    }
-  </style>
+   <style>
+     body { font-family: 'Inter', sans-serif; background: #0a0a0a; }
+     .cms-input, .cms-textarea {
+       width: 100%;
+       padding: 0.75rem;
+       background: #1a1a1a;
+       border: 2px solid #374151;
+       border-radius: 0.5rem;
+       color: white;
+       font-size: 0.875rem;
+       transition: border-color 0.2s, box-shadow 0.2s;
+     }
+     .cms-input:focus, .cms-textarea:focus {
+       outline: none;
+       border-color: #d4a84b;
+       box-shadow: 0 0 0 3px rgba(212, 168, 75, 0.2);
+     }
+     .cms-textarea { min-height: 120px; resize: vertical; }
+     .section-card {
+       background: linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%);
+       border: 1px solid #2a2a2a;
+       border-radius: 1rem;
+       padding: 2rem;
+       margin-bottom: 2rem;
+       transition: border-color 0.3s, box-shadow 0.3s;
+     }
+     .section-card:hover { border-color: #d4a84b40; }
+     .section-title {
+       font-size: 1.5rem;
+       font-weight: 700;
+       color: #d4a84b;
+       margin-bottom: 1.5rem;
+       padding-bottom: 0.75rem;
+       border-bottom: 2px solid #d4a84b30;
+       display: flex;
+       align-items: center;
+       gap: 0.75rem;
+     }
+     .field-group {
+       margin-bottom: 1.5rem;
+       padding: 1.25rem;
+       background: #0a0a0a;
+       border-radius: 0.75rem;
+       border: 1px solid #1f1f1f;
+     }
+     .field-label {
+       display: block;
+       font-size: 0.875rem;
+       font-weight: 600;
+       color: #e5e5e5;
+       margin-bottom: 0.5rem;
+     }
+     .field-hint {
+       font-size: 0.75rem;
+       color: #9ca3af;
+       margin-top: 0.5rem;
+       display: flex;
+       align-items: center;
+       gap: 0.5rem;
+     }
+     .btn-generate {
+       display: inline-flex;
+       align-items: center;
+       gap: 0.5rem;
+       padding: 0.5rem 1rem;
+       background: #374151;
+       color: white;
+       border-radius: 0.5rem;
+       font-size: 0.75rem;
+       text-decoration: none;
+       transition: background 0.2s;
+       margin-top: 0.5rem;
+     }
+     .btn-generate:hover { background: #4b5563; }
+     .btn-save-section {
+       display: inline-flex;
+       align-items: center;
+       gap: 0.5rem;
+       padding: 0.75rem 1.5rem;
+       background: #d4a84b;
+       color: black;
+       border: none;
+       border-radius: 0.5rem;
+       font-weight: 600;
+       cursor: pointer;
+       transition: all 0.3s;
+       margin-top: 1rem;
+     }
+     .btn-save-section:hover {
+       background: #b8923a;
+       transform: translateY(-1px);
+     }
+     .btn-save-section.saved {
+       background: #10b981;
+       color: white;
+     }
+     .btn-save-section.saved i {
+       animation: checkBounce 0.5s ease;
+     }
+     @keyframes checkBounce {
+       0%, 100% { transform: scale(1); }
+       50% { transform: scale(1.3); }
+     }
+     .success-toast {
+       position: fixed;
+       top: 1rem;
+       right: 1rem;
+       background: #10b981;
+       color: white;
+       padding: 1rem 1.5rem;
+       border-radius: 0.5rem;
+       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+       z-index: 1000;
+       animation: slideIn 0.3s ease;
+       display: flex;
+       align-items: center;
+       gap: 0.75rem;
+     }
+     @keyframes slideIn {
+       from { transform: translateX(100%); opacity: 0; }
+       to { transform: translateX(0); opacity: 1; }
+     }
+     .admin-header {
+       background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+       border-bottom: 1px solid #d4a84b30;
+       padding: 1.5rem 0;
+       margin-bottom: 2rem;
+     }
+   </style>
 </head>
 <body class="bg-brand-black text-white">
   <div class="max-w-6xl mx-auto px-4 py-8">
@@ -1007,32 +608,42 @@ async function adminPanel(request, env) {
           <div class="space-y-4 ml-4">
             <div class="bg-brand-gray/50 p-4 rounded-lg border border-gray-700">
               <p class="font-semibold text-brand-gold mb-2">Jeden wyraz:</p>
-              <div class="code-example" onclick="copyToClipboard(this)" data-copy="<span class=\"text-brand-gold\">Twoje Słowo</span>">
-                &lt;span class="text-brand-gold"&gt;Twoje Słowo&lt;/span&gt;
-              </div>
+              <p class="text-gray-200 leading-relaxed">
+                Aby słowo było złote, wpisz przed nim <code class="inline-block bg-black px-2 py-1 rounded text-sm text-brand-gold mx-1">&lt;span&gt;</code> z odpowiednią klasą i zamknij go <code class="inline-block bg-black px-2 py-1 rounded text-sm text-brand-gold mx-1">&lt;/span&gt;</code>.
+              </p>
+              <p class="text-gray-300 mt-2">
+                <strong>Wzór do wpisania:</strong><br>
+                <code class="block bg-black/50 p-3 rounded mt-1 text-gray-200 font-mono text-sm">
+                  &lt;span class="text-brand-gold"&gt;Twoje Słowo&lt;/span&gt;
+                </code>
+              </p>
             </div>
 
             <div class="bg-brand-gray/50 p-4 rounded-lg border border-gray-700">
               <p class="font-semibold text-brand-gold mb-2">Dwa wyrazy (lub więcej):</p>
-              <div class="code-example" onclick="copyToClipboard(this)" data-copy="<span class=\"text-brand-gold\">TWOJE SŁOWO I TWOJE SŁOWO</span>">
-                &lt;span class="text-brand-gold"&gt;TWOJE SŁOWO I TWOJE SŁOWO&lt;/span&gt;
-              </div>
+              <p class="text-gray-200 leading-relaxed">
+                Aby dwa wyrazy były złote, owiń je oba w jeden znacznik.
+              </p>
+              <p class="text-gray-300 mt-2">
+                <strong>Wzór do wpisania:</strong><br>
+                <code class="block bg-black/50 p-3 rounded mt-1 text-gray-200 font-mono text-sm">
+                  &lt;span class="text-brand-gold"&gt;Pierwsze i Drugie Słowo&lt;/span&gt;
+                </code>
+              </p>
             </div>
 
             <div class="bg-brand-gray/50 p-4 rounded-lg border border-gray-700">
               <p class="font-semibold text-brand-gold mb-2">Przykład – pełne zdanie:</p>
-              <div class="code-example" onclick="copyToClipboard(this)" data-copy="Kompleksowa Usługa <span class=\"text-brand-gold\">Brukarska</span>">
-                Kompleksowa Usługa &lt;span class="text-brand-gold"&gt;Brukarska&lt;/span&gt;
-              </div>
-            </div>
-
-            <div class="ml-4 space-y-2 text-sm">
-              <p class="text-gray-300"><strong>Standard (całość biała):</strong></p>
-              <p class="italic text-gray-400">Kompleksowa Usługa Brukarska</p>
-              
-              <p class="text-gray-300 mt-3"><strong>Ze złotym słowem:</strong></p>
-              <p class="italic text-gray-400">Kompleksowa Usługa <span class="text-brand-gold">Brukarska</span></p>
-              <p class="text-xs text-gray-500 mt-1">(słowo "Brukarska" będzie złote na stronie)</p>
+              <p class="text-gray-300 mt-2">
+                <strong>Wzór do wpisania:</strong><br>
+                <code class="block bg-black/50 p-3 rounded mt-1 text-gray-200 font-mono text-sm">
+                  Kompleksowa Usługa &lt;span class="text-brand-gold"&gt;Brukarska&lt;/span&gt;
+                </code>
+              </p>
+              <p class="text-sm text-gray-400 mt-2">
+                Po zapisaniu na stronie wyświetli się: 
+                <span class="text-white">Kompleksowa Usługa </span><span class="text-brand-gold">Brukarska</span>
+              </p>
             </div>
           </div>
         </div>
@@ -1130,41 +741,6 @@ async function adminPanel(request, env) {
     // Open postimages.org in new tab
     function openPostimages() {
       window.open('https://postimages.org/', '_blank');
-    }
-
-    // Copy code snippet to clipboard
-    function copyToClipboard(element) {
-      const codeToCopy = element.getAttribute('data-copy');
-      navigator.clipboard.writeText(codeToCopy).then(() => {
-        showCopyFeedback();
-      }).catch(err => {
-        console.error('Failed to copy: ', err);
-        // Fallback
-        const textArea = document.createElement('textarea');
-        textArea.value = codeToCopy;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        showCopyFeedback();
-      });
-    }
-
-    function showCopyFeedback() {
-      // Remove existing feedback if any
-      const existing = document.getElementById('copyFeedback');
-      if (existing) existing.remove();
-
-      const feedback = document.createElement('div');
-      feedback.id = 'copyFeedback';
-      feedback.className = 'copy-feedback';
-      feedback.innerHTML = '<i class="fas fa-check"></i> Skopiowano!';
-      document.body.appendChild(feedback);
-
-      setTimeout(() => {
-        feedback.style.animation = 'copySlideUp 0.3s ease forwards';
-        setTimeout(() => feedback.remove(), 300);
-      }, 1500);
     }
   </script>
 </body>
