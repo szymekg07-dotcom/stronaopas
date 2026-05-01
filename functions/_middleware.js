@@ -592,55 +592,58 @@ async function adminPanel(request, env) {
         📖 Kliknij tutaj, aby zobaczyć pełną instrukcję (kolory, zdjęcia, zapisywanie)
       </summary>
       
-      <div class="mt-6 space-y-6 text-gray-200">
+      <div class="mt-6 space-y-8 text-gray-200">
         <!-- Standard text section -->
-        <div>
-          <h3 class="text-white font-bold text-lg mb-2">📝 Tekst zwykły (biały)</h3>
-          <p class="leading-relaxed">
+        <div class="mb-6">
+          <h3 class="text-white font-bold text-xl mb-2">📝 Tekst zwykły (biały)</h3>
+          <p class="leading-relaxed text-gray-300">
             Jeśli chcesz, aby tekst był zwykły (biały), po prostu wpisz go normalnie w pole edycji, bez żadnych dodatkowych znaczników.
           </p>
         </div>
 
         <!-- Gold color section -->
-        <div>
-          <h3 class="text-white font-bold text-lg mb-3">✨ Jak dodać złoty kolor?</h3>
+        <div class="mb-6">
+          <h3 class="text-white font-bold text-xl mb-4">✨ Jak dodać złoty kolor?</h3>
           
-          <div class="space-y-4 ml-4">
-            <div class="bg-brand-gray/50 p-4 rounded-lg border border-gray-700">
-              <p class="font-semibold text-brand-gold mb-2">Jeden wyraz:</p>
-              <p class="text-gray-200 leading-relaxed">
-                Aby słowo było złote, wpisz przed nim <code class="inline-block bg-black px-2 py-1 rounded text-sm text-brand-gold mx-1">&lt;span&gt;</code> z odpowiednią klasą i zamknij go <code class="inline-block bg-black px-2 py-1 rounded text-sm text-brand-gold mx-1">&lt;/span&gt;</code>.
+          <div class="space-y-8">
+            <!-- One word -->
+            <div class="bg-brand-gray/30 p-6 rounded-lg border border-gray-700/50 mb-6">
+              <h4 class="font-bold text-brand-gold text-xl mb-3">Jeden wyraz:</h4>
+              <p class="text-gray-300 mb-4 leading-relaxed">
+                Aby słowo było złote, wpisz przed nim <span class="inline-block bg-black/70 px-3 py-1.5 rounded text-base text-green-400 font-mono border border-gray-600 tracking-wide">&lt;span&gt;</span> z odpowiednią klasą i zamknij go <span class="inline-block bg-black/70 px-3 py-1.5 rounded text-base text-green-400 font-mono border border-gray-600 tracking-wide">&lt;/span&gt;</span>.
               </p>
-              <p class="text-gray-300 mt-2">
-                <strong>Wzór do wpisania:</strong><br>
-                <code class="block bg-black/50 p-3 rounded mt-1 text-gray-200 font-mono text-sm">
+              <div class="bg-black/50 p-5 rounded-lg border border-gray-600/40 mt-4">
+                <p class="text-sm text-gray-400 mb-2 font-medium">Wzór do wpisania:</p>
+                <code class="block text-gray-100 font-mono text-base leading-relaxed break-words">
                   &lt;span class="text-brand-gold"&gt;Twoje Słowo&lt;/span&gt;
                 </code>
-              </p>
+              </div>
             </div>
 
-            <div class="bg-brand-gray/50 p-4 rounded-lg border border-gray-700">
-              <p class="font-semibold text-brand-gold mb-2">Dwa wyrazy (lub więcej):</p>
-              <p class="text-gray-200 leading-relaxed">
+            <!-- Two words -->
+            <div class="bg-brand-gray/30 p-6 rounded-lg border border-gray-700/50 mb-6">
+              <h4 class="font-bold text-brand-gold text-xl mb-3">Dwa wyrazy (lub więcej):</h4>
+              <p class="text-gray-300 mb-4 leading-relaxed">
                 Aby dwa wyrazy były złote, owiń je oba w jeden znacznik.
               </p>
-              <p class="text-gray-300 mt-2">
-                <strong>Wzór do wpisania:</strong><br>
-                <code class="block bg-black/50 p-3 rounded mt-1 text-gray-200 font-mono text-sm">
+              <div class="bg-black/50 p-5 rounded-lg border border-gray-600/40 mt-4">
+                <p class="text-sm text-gray-400 mb-2 font-medium">Wzór do wpisania:</p>
+                <code class="block text-gray-100 font-mono text-base leading-relaxed break-words">
                   &lt;span class="text-brand-gold"&gt;Pierwsze i Drugie Słowo&lt;/span&gt;
                 </code>
-              </p>
+              </div>
             </div>
 
-            <div class="bg-brand-gray/50 p-4 rounded-lg border border-gray-700">
-              <p class="font-semibold text-brand-gold mb-2">Przykład – pełne zdanie:</p>
-              <p class="text-gray-300 mt-2">
-                <strong>Wzór do wpisania:</strong><br>
-                <code class="block bg-black/50 p-3 rounded mt-1 text-gray-200 font-mono text-sm">
+            <!-- Full sentence example -->
+            <div class="bg-brand-gray/30 p-6 rounded-lg border border-gray-700/50 mb-6">
+              <h4 class="font-bold text-brand-gold text-xl mb-3">Przykład – pełne zdanie:</h4>
+              <div class="bg-black/50 p-5 rounded-lg border border-gray-600/40 mt-4">
+                <p class="text-sm text-gray-400 mb-2 font-medium">Wzór do wpisania:</p>
+                <code class="block text-gray-100 font-mono text-base leading-relaxed break-words">
                   Kompleksowa Usługa &lt;span class="text-brand-gold"&gt;Brukarska&lt;/span&gt;
                 </code>
-              </p>
-              <p class="text-sm text-gray-400 mt-2">
+              </div>
+              <p class="text-sm text-gray-400 mt-4 italic">
                 Po zapisaniu na stronie wyświetli się: 
                 <span class="text-white">Kompleksowa Usługa </span><span class="text-brand-gold">Brukarska</span>
               </p>
@@ -649,23 +652,23 @@ async function adminPanel(request, env) {
         </div>
 
         <!-- Images section -->
-        <div>
+        <div class="mb-6">
           <h3 class="text-white font-bold text-lg mb-2">🖼️ Jak dodać zdjęcie?</h3>
-          <ol class="list-decimal list-inside space-y-2 ml-4">
+          <ol class="list-decimal list-inside space-y-2 ml-4 text-gray-300">
             <li>Kliknij przycisk <span class="inline-block px-2 py-1 bg-gray-700 rounded text-xs">📸 Generuj link z pliku</span></li>
             <li>Wgraj plik na serwer postimages.org</li>
             <li>Skopiuj <strong>"Link bezpośredni"</strong> z postimages</li>
             <li>Wklej go w pole tekstowe zdjęcia</li>
           </ol>
-          <p class="text-sm text-gray-400 mt-2 ml-4">
+          <p class="text-sm text-gray-400 mt-3 ml-4">
             <strong>Ważne:</strong> Po wklejeniu linku koniecznie kliknij <span class="inline-block px-2 py-1 bg-brand-gold text-black font-semibold rounded text-sm">Zapisz sekcję</span>!
           </p>
         </div>
 
         <!-- Save section -->
-        <div>
+        <div class="mb-6">
           <h3 class="text-white font-bold text-lg mb-2">💾 Zapisywanie zmian</h3>
-          <p class="leading-relaxed">
+          <p class="leading-relaxed text-gray-300">
             Po każdej edycji w danej sekcji kliknij przycisk <span class="inline-block px-2 py-1 bg-brand-gold text-black font-semibold rounded text-sm mx-1">Zapisz sekcję</span>. 
             Zmiany pojawią się na stronie natychmiast po zapisie. Nie ma przycisku "Zapisz wszystkie" – każdą sekcję zapisuj osobno.
           </p>
