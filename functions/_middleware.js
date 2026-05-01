@@ -199,7 +199,7 @@ function loginPage() {
     <form id="loginForm" class="bg-brand-gray p-8 rounded-lg border border-gray-800">
       <div class="mb-6">
         <label class="block text-sm font-medium mb-2">Hasło</label>
-        <input type="password" id="password" class="w-full px-4 py-3 bg-brand-black border border-gray-700 rounded-lg focus:border-brand-gold focus:outline-none text-white" placeholder="Wprowadź hasło" required>
+        <input type="password" id="password" class="w-full px-4 py-3 bg-black border-2 border-brand-gold rounded-lg focus:border-white focus:outline-none text-white placeholder-gray-400" placeholder="Wprowadź hasło" required>
       </div>
       <button type="submit" class="w-full bg-brand-gold text-brand-black py-3 rounded-lg font-bold hover:bg-opacity-90 transition">
         Zaloguj się
@@ -305,81 +305,218 @@ async function adminPanel(request, env) {
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
     body { font-family: 'Inter', sans-serif; background: #0a0a0a; }
-    .cms-field { margin-bottom: 1.5rem; }
-    .cms-label { display: block; font-size: 0.875rem; color: #d4a84b; margin-bottom: 0.5rem; font-weight: 600; }
     .cms-input, .cms-textarea {
       width: 100%;
       padding: 0.75rem;
       background: #1a1a1a;
-      border: 1px solid #374151;
+      border: 2px solid #374151;
       border-radius: 0.5rem;
       color: white;
       font-size: 0.875rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
     .cms-input:focus, .cms-textarea:focus {
       outline: none;
       border-color: #d4a84b;
+      box-shadow: 0 0 0 3px rgba(212, 168, 75, 0.2);
     }
-    .cms-textarea { min-height: 100px; resize: vertical; }
+    .cms-textarea { min-height: 120px; resize: vertical; }
+    .section-card {
+      background: linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%);
+      border: 1px solid #2a2a2a;
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .section-card:hover {
+      border-color: #d4a84b40;
+    }
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #d4a84b;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid #d4a84b30;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .field-group {
+      margin-bottom: 1.5rem;
+      padding: 1.25rem;
+      background: #0a0a0a;
+      border-radius: 0.75rem;
+      border: 1px solid #1f1f1f;
+    }
+    .field-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #e5e5e5;
+      margin-bottom: 0.5rem;
+    }
+    .field-hint {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-generate {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: #374151;
+      color: white;
+      border-radius: 0.5rem;
+      font-size: 0.75rem;
+      text-decoration: none;
+      transition: background 0.2s;
+      margin-top: 0.5rem;
+    }
+    .btn-generate:hover {
+      background: #4b5563;
+    }
+    .btn-save-section {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      background: #d4a84b;
+      color: black;
+      border: none;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 1rem;
+    }
+    .btn-save-section:hover {
+      background: #b8923a;
+      transform: translateY(-1px);
+    }
+    .btn-save-section.saved {
+      background: #10b981;
+      color: white;
+    }
+    .btn-save-section.saved i {
+      animation: checkBounce 0.5s ease;
+    }
+    @keyframes checkBounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+    .success-toast {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: #10b981;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      z-index: 1000;
+      animation: slideIn 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    .admin-header {
+      background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+      border-bottom: 1px solid #d4a84b30;
+      padding: 1.5rem 0;
+      margin-bottom: 2rem;
+    }
   </style>
 </head>
-<body class="bg-brand-black text-white p-6">
-  <div class="max-w-6xl mx-auto">
-    <!-- Header -->
-    <div class="flex justify-between items-center mb-8 pb-6 border-b border-gray-800">
-      <div>
-        <h1 class="text-3xl font-bold text-brand-gold">Panel CMS</h1>
-        <p class="text-gray-400 mt-1">Edytuj treści strony opas.com.pl</p>
-      </div>
-      <div class="flex gap-4">
-        <button onclick="preview()" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-          <i class="fas fa-eye mr-2"></i>Podgląd
-        </button>
-        <button onclick="logout()" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition">
-          <i class="fas fa-sign-out-alt mr-2"></i>Wyloguj
-        </button>
+<body class="bg-brand-black text-white">
+  <div class="max-w-6xl mx-auto px-4 py-8">
+
+    <!-- Admin Header -->
+    <div class="admin-header rounded-2xl mb-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-4 px-6">
+        <div>
+          <h1 class="text-3xl font-bold text-brand-gold flex items-center gap-3">
+            <i class="fas fa-cogs"></i>
+            Panel CMS
+          </h1>
+          <p class="text-gray-400 mt-1">Edytuj treści strony Maciej Opas - Kostka Brukowa</p>
+        </div>
+        <div class="flex gap-3">
+          <button onclick="preview()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center gap-2">
+            <i class="fas fa-eye"></i>
+            <span class="hidden sm:inline">Podgląd</span>
+          </button>
+          <button onclick="logout()" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition flex items-center gap-2">
+            <i class="fas fa-sign-out-alt"></i>
+            <span class="hidden sm:inline">Wyloguj</span>
+          </button>
+        </div>
       </div>
     </div>
 
-    <!-- Success Message -->
-    <div id="successMessage" class="hidden mb-6 p-4 bg-green-900 border border-green-600 rounded text-green-300">
-      Zmiany zapisane pomyślnie!
+    <!-- Success Toast -->
+    <div id="toast" class="hidden">
+      <i class="fas fa-check-circle text-xl"></i>
+      <span>Zapisano pomyślnie!</span>
     </div>
 
-    <!-- Fields -->
-    <form id="cmsForm" class="grid md:grid-cols-2 gap-8">
-      ${generateFormFields(cmsData)}
+    <!-- CMS Form Sections -->
+    <form id="cmsForm">
+      ${generateSections(cmsData)}
     </form>
 
-    <!-- Save Button -->
-    <div class="mt-12 pt-6 border-t border-gray-800">
-      <button onclick="saveAll()" class="w-full md:w-auto px-8 py-4 bg-brand-gold text-brand-black font-bold rounded-lg hover:bg-opacity-90 transition text-lg">
-        <i class="fas fa-save mr-2"></i>Zapisz wszystkie zmiany
-      </button>
-    </div>
   </div>
 
   <script>
-    async function saveAll() {
-      const formData = new FormData(document.getElementById('cmsForm'));
+    // Section-based save function
+    async function saveSection(sectionId, btn) {
+      const section = document.getElementById(sectionId);
+      const inputs = section.querySelectorAll('input, textarea');
       const data = {};
-
-      formData.forEach((value, key) => {
-        data[key] = value;
+      
+      inputs.forEach(input => {
+        if (input.name) {
+          data[input.name] = input.value;
+        }
       });
 
       const response = await fetch('/admin/save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
+        body: JSON.stringify({ data })
       });
 
       if (response.ok) {
-        document.getElementById('successMessage').classList.remove('hidden');
+        // Visual feedback
+        const originalContent = btn.innerHTML;
+        btn.classList.add('saved');
+        btn.innerHTML = '<i class="fas fa-check"></i> Zapisano!';
+        btn.disabled = true;
+        
         setTimeout(() => {
-          document.getElementById('successMessage').classList.add('hidden');
-        }, 3000);
+          btn.classList.remove('saved');
+          btn.innerHTML = originalContent;
+          btn.disabled = false;
+        }, 2000);
+
+        // Show toast
+        showToast();
       }
+    }
+
+    function showToast() {
+      const toast = document.getElementById('toast');
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 3000);
     }
 
     function preview() {
@@ -390,6 +527,11 @@ async function adminPanel(request, env) {
       fetch('/admin/logout', { method: 'POST' })
         .then(() => { window.location.href = '/admin'; });
     }
+
+    // Open postimages.org in new tab
+    function openPostimages() {
+      window.open('https://postimages.org/', '_blank');
+    }
   </script>
 </body>
 </html>`;
@@ -399,89 +541,232 @@ async function adminPanel(request, env) {
   });
 }
 
-function generateFormFields(cmsData) {
-  const fields = [];
-
-  for (const [key, value] of Object.entries(cmsData)) {
-    const label = formatLabel(key);
-
-    if (key.includes('bg_') || key.includes('_bg') || key.includes('background')) {
-      fields.push(`
-        <div class="cms-field bg-brand-gray p-6 rounded-lg border border-gray-800">
-          <label class="cms-label">${label}</label>
-          <input type="text" name="${key}" value="${escapeHtml(value)}" class="cms-input" placeholder="URL obrazka">
-          <p class="text-gray-500 text-xs mt-2">Wprowadź URL obrazka (np. obrazek z serwera lub zewnętrzny link)</p>
-        </div>
-      `);
-    } else if (key.includes('img') || key.includes('logo') || key.includes('photo') || key.includes('gallery')) {
-      fields.push(`
-        <div class="cms-field bg-brand-gray p-6 rounded-lg border border-gray-800">
-          <label class="cms-label">${label}</label>
-          <input type="text" name="${key}" value="${escapeHtml(value)}" class="cms-input" placeholder="URL obrazka">
-          <p class="text-gray-500 text-xs mt-2">Wprowadź URL obrazka (np. obrazek z serwera lub zewnętrzny link)</p>
-        </div>
-      `);
-    } else {
-      fields.push(`
-        <div class="cms-field bg-brand-gray p-6 rounded-lg border border-gray-800">
-          <label class="cms-label">${label}</label>
-          <textarea name="${key}" class="cms-textarea" placeholder="Treść tekstu">${escapeHtml(value)}</textarea>
-        </div>
-      `);
+// Section definitions with field groupings
+const CMS_SECTIONS = [
+  {
+    id: 'hero',
+    title: 'Sekcja Hero & Header',
+    icon: 'fas fa-home',
+    fields: ['hero_title', 'hero_subtitle', 'hero_cta1', 'hero_cta2', 'hero_bg_image', 'header_logo', 'header_tagline'],
+    imageFields: ['hero_bg_image', 'header_logo'],
+    fieldLabels: {
+      'hero_title': 'Tytuł główny strony (Hero)',
+      'hero_subtitle': 'Podtytuł / opis sekcji Hero',
+      'hero_cta1': 'Tekst przycisku CTA 1 (Hero)',
+      'hero_cta2': 'Tekst przycisku CTA 2 (Hero)',
+      'hero_bg_image': 'Obraz tła sekcji Hero (zdjęcie główne)',
+      'header_logo': 'Logo firmy (header)',
+      'header_tagline': 'Podtytuł pod logo (np. "Kostka Brukowa")'
+    },
+    imageSizes: {
+      'hero_bg_image': 'Rekomendowane: 1920x1080px (Full HD)',
+      'header_logo': 'Rekomendowane: 300x300px (przezroczyste PNG)'
+    }
+  },
+  {
+    id: 'realizacje',
+    title: 'Sekcja Realizacje',
+    icon: 'fas fa-images',
+    fields: ['realizacje_intro'],
+    imageFields: [],
+    fieldLabels: {
+      'realizacje_intro': 'Wstępny opis pod tytułem sekcji Realizacje'
+    }
+  },
+  {
+    id: 'about',
+    title: 'Sekcja O Nas',
+    icon: 'fas fa-users',
+    fields: ['about_title', 'about_text1', 'about_text2', 'about_img1', 'about_img2'],
+    imageFields: ['about_img1', 'about_img2'],
+    fieldLabels: {
+      'about_title': 'Tytuł sekcji "O Nas"',
+      'about_text1': 'Tekst - akapit 1 (kim jesteśmy, misja)',
+      'about_text2': 'Tekst - akapit 2 (doświadczenie, zasięg)',
+      'about_img1': 'Zdjęcie w sekcji O Nas #1 (główne)',
+      'about_img2': 'Zdjęcie w sekcji O Nas #2 (dodatkowe)'
+    },
+    imageSizes: {
+      'about_img1': 'Rekomendowane: 800x600px',
+      'about_img2': 'Rekomendowane: 800x600px'
+    }
+  },
+  {
+    id: 'services',
+    title: 'Sekcja Oferta',
+    icon: 'fas fa-concierge-bell',
+    fields: ['services_title', 'services_intro', 'service1_title', 'service1_desc', 'service1_img', 'service2_title', 'service2_desc', 'service2_img', 'service3_title', 'service3_desc', 'service3_img', 'cta_title', 'cta_text'],
+    imageFields: ['service1_img', 'service2_img', 'service3_img'],
+    fieldLabels: {
+      'services_title': 'Tytuł sekcji Oferta',
+      'services_intro': 'Wstępny opis oferty (pod tytułem)',
+      'service1_title': 'Nazwa usługi 1',
+      'service1_desc': 'Opis usługi 1',
+      'service1_img': 'Zdjęcie usługi 1 (kostka brukowa)',
+      'service2_title': 'Nazwa usługi 2',
+      'service2_desc': 'Opis usługi 2',
+      'service2_img': 'Zdjęcie usługi 2 (ogrodzenia)',
+      'service3_title': 'Nazwa usługi 3',
+      'service3_desc': 'Opis usługi 3',
+      'service3_img': 'Zdjęcie usługi 3 (układanie kostki)',
+      'cta_title': 'Tytuł banera CTA (na dole oferty)',
+      'cta_text': 'Tekst banera CTA'
+    },
+    imageSizes: {
+      'service1_img': 'Rekomendowane: 800x600px',
+      'service2_img': 'Rekomendowane: 800x600px',
+      'service3_img': 'Rekomendowane: 800x600px'
+    }
+  },
+  {
+    id: 'equipment',
+    title: 'Sekcja Sprzęt',
+    icon: 'fas fa-truck',
+    fields: ['equipment_intro', 'equipment1_img', 'equipment2_img', 'equipment3_img'],
+    imageFields: ['equipment1_img', 'equipment2_img', 'equipment3_img'],
+    fieldLabels: {
+      'equipment_intro': 'Wstęp do sekcji Sprzęt',
+      'equipment1_img': 'Sprzęt 1 - zdjęcie maszyny',
+      'equipment2_img': 'Sprzęt 2 - zdjęcie maszyny',
+      'equipment3_img': 'Sprzęt 3 - zdjęcie maszyny'
+    },
+    imageSizes: {
+      'equipment1_img': 'Rekomendowane: 800x600px',
+      'equipment2_img': 'Rekomendowane: 800x600px',
+      'equipment3_img': 'Rekomendowane: 800x600px'
+    }
+  },
+  {
+    id: 'gallery',
+    title: 'Galeria Realizacji',
+    icon: 'fas fa-images',
+    fields: ['gallery_1','gallery_2','gallery_3','gallery_4','gallery_5','gallery_6','gallery_7','gallery_8','gallery_9','gallery_10','gallery_11','gallery_12','gallery_13','gallery_14','gallery_15','gallery_16','gallery_17','gallery_18','gallery_19','gallery_20'],
+    imageFields: ['gallery_1','gallery_2','gallery_3','gallery_4','gallery_5','gallery_6','gallery_7','gallery_8','gallery_9','gallery_10','gallery_11','gallery_12','gallery_13','gallery_14','gallery_15','gallery_16','gallery_17','gallery_18','gallery_19','gallery_20'],
+    fieldLabels: (key) => `Galeria - zdjęcie nr ${key.replace('gallery_', '')}`,
+    imageSizes: (key) => 'Rekomendowane: 800x600px'
+  },
+  {
+    id: 'testimonials',
+    title: 'Opinie Klientów',
+    icon: 'fas fa-star',
+    fields: ['testimonials_intro', 'testimonial1', 'testimonial2', 'testimonial3'],
+    imageFields: [],
+    fieldLabels: {
+      'testimonials_intro': 'Wstęp do sekcji Opinie',
+      'testimonial1': 'Treść opinii 1',
+      'testimonial2': 'Treść opinii 2',
+      'testimonial3': 'Treść opinii 3'
+    }
+  },
+  {
+    id: 'faq',
+    title: 'FAQ - Pytania i Odpowiedzi',
+    icon: 'fas fa-question-circle',
+    fields: ['faq_title', 'faq_q1', 'faq_a1', 'faq_q2', 'faq_a2', 'faq_q3', 'faq_a3', 'faq_q4', 'faq_a4'],
+    imageFields: [],
+    fieldLabels: {
+      'faq_title': 'Tytuł sekcji FAQ',
+      'faq_q1': 'Pytanie 1',
+      'faq_a1': 'Odpowiedź 1',
+      'faq_q2': 'Pytanie 2',
+      'faq_a2': 'Odpowiedź 2',
+      'faq_q3': 'Pytanie 3',
+      'faq_a3': 'Odpowiedź 3',
+      'faq_q4': 'Pytanie 4',
+      'faq_a4': 'Odpowiedź 4'
+    }
+  },
+  {
+    id: 'contact',
+    title: 'Sekcja Kontakt',
+    icon: 'fas fa-phone',
+    fields: ['contact_intro'],
+    imageFields: [],
+    fieldLabels: {
+      'contact_intro': 'Wstępny tekst pod tytułem sekcji Kontakt'
+    }
+  },
+  {
+    id: 'footer',
+    title: 'Stopka (Footer)',
+    icon: 'fas fa-shoe-prints',
+    fields: ['footer_copyright', 'footer_subtitle', 'footer_address'],
+    imageFields: [],
+    fieldLabels: {
+      'footer_copyright': 'Tekst copyright (np. "© 2026 Maciej Opas...")',
+      'footer_subtitle': 'Podtytuł w stopce (np. "Kostka Brukowa")',
+      'footer_address': 'Adres / zasięg działania'
     }
   }
+];
 
-  return fields.join('\n      ');
+function generateSections(cmsData) {
+  return CMS_SECTIONS.map(section => {
+    const sectionId = section.id;
+    const title = section.title;
+    const icon = section.icon;
+    
+    // Filter fields that exist in cmsData (some might not be used yet)
+    const existingFields = section.fields.filter(field => field in cmsData);
+    
+    const fieldsHtml = existingFields.map(fieldKey => {
+      const value = cmsData[fieldKey] || '';
+      const isImage = section.imageFields.includes(fieldKey);
+      const label = typeof section.fieldLabels === 'function' 
+        ? section.fieldLabels(fieldKey) 
+        : (section.fieldLabels[fieldKey] || formatLabel(fieldKey));
+      const sizeHint = section.imageSizes 
+        ? (typeof section.imageSizes === 'function' 
+            ? section.imageSizes(fieldKey) 
+            : section.imageSizes[fieldKey])
+        : null;
+
+      if (isImage) {
+        return `
+        <div class="field-group">
+          <label class="field-label">${label}</label>
+          <input type="text" 
+                 name="${fieldKey}" 
+                 value="${escapeHtml(value)}" 
+                 class="cms-input" 
+                 placeholder="https://przyklad.com/zdjecie.jpg">
+          ${sizeHint ? `<p class="field-hint"><i class="fas fa-info-circle"></i> ${sizeHint}</p>` : ''}
+          <a href="https://postimages.org/" target="_blank" class="btn-generate" onclick="openPostimages()">
+            <i class="fas fa-camera"></i> Generuj link z pliku
+          </a>
+        </div>`;
+      } else {
+        return `
+        <div class="field-group">
+          <label class="field-label">${label}</label>
+          <textarea name="${fieldKey}" class="cms-textarea" placeholder="Treść...">${escapeHtml(value)}</textarea>
+        </div>`;
+      }
+    }).join('');
+
+    return `
+      <section id="${sectionId}" class="section-card">
+        <h2 class="section-title">
+          <i class="${icon}"></i>
+          ${title}
+        </h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          ${fieldsHtml}
+        </div>
+        <button type="button" 
+                class="btn-save-section" 
+                onclick="saveSection('${sectionId}', this)">
+          <i class="fas fa-save"></i>
+          Zapisz sekcję
+        </button>
+      </section>
+    `;
+  }).join('\n      ');
 }
 
 function formatLabel(key) {
-  // Convert snake_case to readable Polish labels
-  const labels = {
-    'hero_title': 'Tytuł główny (Hero)',
-    'hero_subtitle': 'Podtytuł / opis (Hero)',
-    'hero_bg_image': 'Obraz tła sekcji Hero',
-    'hero_cta1': 'Przycisk CTA 1 (Hero)',
-    'hero_cta2': 'Przycisk CTA 2 (Hero)',
-    'about_title': 'Tytuł sekcji "O Nas"',
-    'about_text1': 'Tekst about - akapit 1',
-    'about_text2': 'Tekst about - akapit 2',
-    'services_title': 'Tytuł sekcji "Oferta"',
-    'services_intro': 'Wstęp do oferty',
-    'service1_title': 'Nazwa usługi 1',
-    'service1_desc': 'Opis usługi 1',
-    'service2_title': 'Nazwa usługi 2',
-    'service2_desc': 'Opis usługi 2',
-    'service3_title': 'Nazwa usługi 3',
-    'service3_desc': 'Opis usługi 3',
-    'cta_title': 'Tytuł CTA banner',
-    'cta_text': 'Tekst CTA banner',
-    'equipment_title': 'Tytuł sekcji "Sprzęt"',
-    'equipment_intro': 'Wstęp do sprzętu',
-    'testimonials_title': 'Tytuł sekcji "Opinie"',
-    'testimonials_intro': 'Wstęp do opinii',
-    'testimonial1': 'Opinia 1',
-    'testimonial2': 'Opinia 2',
-    'testimonial3': 'Opinia 3',
-    'faq_title': 'Tytuł sekcji "FAQ"',
-    'faq_q1': 'Pytanie FAQ 1',
-    'faq_a1': 'Odpowiedź FAQ 1',
-    'faq_q2': 'Pytanie FAQ 2',
-    'faq_a2': 'Odpowiedź FAQ 2',
-    'faq_q3': 'Pytanie FAQ 3',
-    'faq_a3': 'Odpowiedź FAQ 3',
-    'faq_q4': 'Pytanie FAQ 4',
-    'faq_a4': 'Odpowiedź FAQ 4',
-    'contact_title': 'Tytuł sekcji "Kontakt"',
-    'contact_intro': 'Wstęp do kontaktu',
-    'footer_copyright': 'Copyright w stopce',
-    'footer_subtitle': 'Podtytuł w stopce',
-    'footer_address': 'Tekst adresu w stopce',
-    'header_tagline': 'Podtytuł w headerze',
-    'page_title': 'Tytuł strony',
-    'page_description': 'Meta opis strony',
-  };
-
-  return labels[key] || key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+  // Fallback: convert snake_case to readable
+  return key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
 }
 
 function escapeHtml(text) {
